@@ -1,0 +1,49 @@
+.Footer-container{
+    background: #013a77;
+    padding: 4rem;
+
+}
+
+.Footer{
+    color:#fff;
+    display:flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 80%;
+    justify-content: space-around;
+}
+
+.Footer-heading{
+    display:flex;
+    flex-direction: column;
+    margin-right: 4rem;
+    max-width: 350px;
+}
+
+.Logo{
+    margin-bottom: 2rem;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.Social{
+    margin-top:2rem;
+}
+.Social-icon-link {
+    color: #fff;
+    font-size: 24px;
+    margin-right: 2rem;
+}
+
+
+@media screen and (max-width: 820px){
+    .Footer-heading{
+        padding-top: 2rem;
+        flex-direction: column;
+    }
+
+}
