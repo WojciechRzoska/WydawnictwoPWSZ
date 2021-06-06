@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+
+Route::resource('book', 'App\Http\Controllers\BooksController');
+Route::get('book/search/{key}',[\App\Http\Controllers\BooksController::class,'search']);
+

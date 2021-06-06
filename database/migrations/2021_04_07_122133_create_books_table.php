@@ -17,9 +17,9 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('description');
-            $table->string('cover');
+            $table->string('image_path');
             $table->integer('pages');
-            $table->string('contests');
+            $table->string('pdf_path');
             $table->integer('year');
             $table->string('ISBN');
             $table->string('publisher');

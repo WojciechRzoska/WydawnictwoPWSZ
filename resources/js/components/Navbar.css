@@ -49,6 +49,14 @@ img {
     height: 100%;
 }
 
+.Nav-links:hover{
+    color:#fff;
+}
+
+.Active-link{
+    color: #0a7ae5;
+    border-bottom: 1px solid #fff;
+}
 
 .fa-bars {
     color: #fff;

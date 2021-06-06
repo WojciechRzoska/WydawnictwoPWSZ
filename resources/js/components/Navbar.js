@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Button } from "./Button";
 import './Navbar.css';
 import Logo from '../../images/WhiteLogo.png';
+
 
 
 function Navbar() {
@@ -32,33 +33,45 @@ function Navbar() {
                 <nav className='Navbar'>
                     <div className='Navbar-container'>
 
-                        <Link to='/' className='Navbar-Logo'>
+                        <NavLink to='/' className='Navbar-Logo'>
                             <img src={Logo} alt='logo'/>
-                        </Link>
+                        </NavLink>
                         <div className='Menu-icon' onClick={handleClick}>
                             <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
                         </div>
                         <ul className={click ? 'Nav-menu active' : 'Nav-menu'}>
                             <li className='Nav-item'>
-                                <Link to='/' className='Nav-links' onClick={closeMobileMenu}>
+                                <NavLink exact activeClassName='Active-link'
+                                         to='/books'
+                                         className='Nav-links'
+                                         onClick={closeMobileMenu}>
                                     Sklep
-                                </Link>
+                                </NavLink>
                             </li>
                             <li className='Nav-item'>
-                                <Link to='/' className='Nav-links' onClick={closeMobileMenu}>
+                                <NavLink exact activeClassName='Active-link'
+                                         to='/'
+                                         className='Nav-links'
+                                         onClick={closeMobileMenu}>
                                     Biuletyny
-                                </Link>
+                                </NavLink>
                             </li>
                             <li className='Nav-item'>
-                                <Link to='/' className='Nav-links' onClick={closeMobileMenu}>
+                                <NavLink exact activeClassName='Active-link'
+                                         to='/'
+                                         className='Nav-links'
+                                         onClick={closeMobileMenu}>
                                     Czasopisma
-                                </Link>
+                                </NavLink>
                             </li>
                             <li>
-                                <Link
-                                    to='/sign-up' className='Nav-links-mobile' onClick={closeMobileMenu}>
+                                <NavLink
+                                    exact activeClassName='Active-link'
+                                    to='/sign-up'
+                                    className='Nav-links-mobile'
+                                    onClick={closeMobileMenu}>
                                     Sign Up
-                                </Link>
+                                </NavLink>
                             </li>
                         </ul>
                         {button && <Button buttonStyle={'btn--outline'}>Zaloguj</Button>}
