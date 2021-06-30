@@ -1,6 +1,8 @@
 import React from 'react';
 import {Button} from "./Button";
 import './WelcomeSection.css';
+import './Button.css';
+import {HashLink as Link} from 'react-router-hash-link';
 
 function WelcomeSection(){
     return(
@@ -8,11 +10,13 @@ function WelcomeSection(){
             <h1>Wydawnictwo PWSZ</h1>
             <p>Biuletyny ksiązki</p>
             <div className='Buttons'>
-            <Button className='btns' buttonStyle='btn--primary' buttonSize='btn--large'>Zobacz co oferujemy</Button>
-
-            <Button className='btns' buttonStyle='btn--primary' buttonSize='btn--large'>Przejdź do sklepu</Button>
+                <Link to='#CardsSection'>
+                    <button className='btn btn--primary btn--large'>Zobacz co oferujemy</button>
+                </Link>
+                <Button className='btn' buttonStyle='btn--primary' buttonSize='btn--large' to='books'>Przejdź do sklepu</Button>
             </div>
         </div>
+
     )
 }
 

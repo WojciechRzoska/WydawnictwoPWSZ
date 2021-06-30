@@ -7,15 +7,15 @@ import Magazines from '../../images/Magazines.jpg';
 
 function CardsSection(){
     return(
-        <div className='Cards-section'>
+        <div className='Cards-section' id='CardsSection'>
             <h1>Sprawdź co oferujemy!</h1>
             <div className='Cards-container'>
-                <div className='Cards-wrapper'>
+                <div className='Cards-wrapper' >
                     <ul className='Cards-items'>
                         <Card
                             src={Books}
                             text='Nasze wydane książki'
-                            path='/services'
+                            path='/books'
                         />
                         <Card
                             src={Magazines}
