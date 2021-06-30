@@ -1,0 +1,15 @@
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    width: 500px;
+    display: flex;
+    align-items: center;
+}
+#cover{
+    width: 30%;
+    height: 30%;
+    margin-left: 20px;
+}

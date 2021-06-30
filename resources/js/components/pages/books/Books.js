@@ -3,15 +3,15 @@ import api from '../../../api';
 import Grid from '@material-ui/core/Grid';
 import {Button, TextField} from '@material-ui/core';
 import Book from './Book/Book';
-import useStyles from "./styles";
 import AddBook from "./BookForms/AddBook";
 import { Link } from 'react-router-dom';
 import EditBook from "./BookForms/EditBook";
+import Footer from "../../Footer";
+import './Books.css';
 
 function Books() {
     const [books,setBooks] = useState(null);
     const [searchData, setSearchData] =useState(books);
-    const classes = useStyles();
 
     useEffect(()=> {
         getData();
@@ -32,48 +32,56 @@ function Books() {
     const renderBooks = () => {
         if(!books){
             return(
-                <p>lol</p>
+                <p>Ładowanie...</p>
             )
         }
-        if(books.lenght === 0){
+        if(books.length == 0){
             return(
-
-                <p>xd</p>
-
+                <p>Brak książek</p>
             )
         }
         if(searchData){
-            return searchData.map((book) => (
-                <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
-                    <Link to={`/edit/${book.id}`} > edit</Link>
-                    <Button variant="contained" onClick={()=>deleteOperation(book.id)}>usuń</Button>
-                    <Book data={book}/>
-                </Grid>
-            ))
+            let data = searchData;
+            if(data.length === 0){
+                return(
+                    <p> Nie znaleziono takiej książki </p>
+                )
+            }else {
+                return data.reverse().map((book) => (
+                    <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
+                        <Link to={`/edit/${book.id}`}> edit</Link>
+                        <Button variant="contained" onClick={() => deleteOperation(book.id)}>usuń</Button>
+                        <Book data={book}/>
+                    </Grid>
+                ))
+            }
         }
-        return books.map((book) => (
-            <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
+
+        return books.reverse().map((book) => (
+            <Grid item key={book.id} xs={7} sm={6} md={4} lg={3}>
                 <Link to={`/edit/${book.id}`} > edit</Link>
                 <Button variant="contained" onClick={()=>deleteOperation(book.id)}>usuń</Button>
-                <Book data={book}/>
+                <Book data={book} />
             </Grid>
         ))
     }
     async function search(key){
         let result = await api.searchBook(key);
         result = await result.data;
-        console.warn(result)
         setSearchData(result);
     }
 
     return(
-        <main className={classes.content}>
+        <>
+        <div className='container'>
             <AddBook />
             <TextField placeholder='Szukaj produktu' onChange={(e) =>search(e.target.value)}/>
             <Grid container justify="center" >
                 {renderBooks()}
             </Grid>
-        </main>
+        </div>
+            <Footer/>
+        </>
 
 
     );

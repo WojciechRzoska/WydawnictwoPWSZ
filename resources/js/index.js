@@ -6,17 +6,22 @@ import './index.css';
 import Home from './components/pages/Home';
 import Books from "./components/pages/books/Books";
 import EditBook from "./components/pages/books/BookForms/EditBook";
+import BookInfo from './components/pages/books/Book/BookInfo';
+import ScrollToTop from "./ScrollToTop";
 
 function Index() {
     return (
         <>
             <Router>
+                <ScrollToTop/>
                 <Navbar/>
                 <Switch>
                     <Route path='/' exact component={Home} />
                     <Route path='/books' exact component={Books}/>
                     <Route path='/edit/:id' component={EditBook}/>
+                    <Route path='/info/:id' component={BookInfo}/>
                 </Switch>
+
             </Router>
 
         </>

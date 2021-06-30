@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Http\Resources\Book as BookResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Intervention\Image\Facades\Image;
+
 
 class BooksController extends Controller
 {
@@ -45,7 +47,7 @@ class BooksController extends Controller
         $book->title = $request->input('title');
         $book->description = $request->input('description');
         $book->pages = $request->input('pages');
-        $book->pdf_path = $request->input('pdf_path');
+//        $book->pdf_path = $request->input('pdf_path');
         $book->year = $request->input('year');
         $book->ISBN = $request->input('ISBN');
         $book->publisher = $request->input('publisher');
@@ -55,19 +57,42 @@ class BooksController extends Controller
         if($request->hasFile('image')){
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
+            $ext = $file->getClientOriginalExtension();
+            $finalName = date('His') . $filename;
+                $book->image_path = $request->file('image')->storeAs('image', $finalName);
+        }
+
+//        if ($request->hasfile('images')) {
+//            $images = $request->file('images');
+//
+//            foreach ($images as $image) {
+//                $filename = $image->getClientOriginalName();
+//                $ext = $image->getClientOriginalExtension();
+//                $finalName = date('His') . $filename;
+//                if ($ext === 'png') {
+//                    $book->image_path = $image->storeAs('image', $finalName);
+//                } else {
+//                    $book->pdf_path = $image->storeAs('documents', $finalName);
+//
+//                }
+//            }
+        if($request->hasFile('pdf')){
+            $file= $request->file('pdf');
+            $filename = $file->getClientOriginalName();
             $finalName = date('His') . $filename;
 
-            $book->image_path = $request->file('image')->storeAs('image', $finalName);
+            $book->pdf_path = $request->file('pdf')->storeAs('document', $finalName);
+        }
+
+            $book->save();
+            return response()->json([
+                'data' => 'Książka dodana'
+            ]);
+
 
         }
 
-        $book->save();
-        return response()->json([
-           'data' => 'Książka dodana'
-        ]);
 
-
-    }
 
     /**
      * Display the specified resource.
@@ -106,7 +131,6 @@ class BooksController extends Controller
 
         $book->description = $request->input('description');
         $book->pages = $request->input('pages');
-        $book->pdf_path = $request->input('pdf_path');
         $book->year = $request->input('year');
         $book->ISBN = $request->input('ISBN');
         $book->publisher = $request->input('publisher');
@@ -119,6 +143,13 @@ class BooksController extends Controller
 
             $book->image_path = $request->file('image')->storeAs('image', $finalName);
 
+        }
+        if($request->hasFile('pdf')){
+            $file= $request->file('pdf');
+            $filename = $file->getClientOriginalName();
+            $finalName = date('His') . $filename;
+
+            $book->pdf_path = $request->file('pdf')->storeAs('document', $finalName);
         }
         $book->save();
 
@@ -145,7 +176,7 @@ class BooksController extends Controller
 
     public function search($key){
         return Book::query()
-        ->where('title','Like', "%$key%")
+            ->where('title','Like', "%$key%")
             ->orwhere('pages','Like', "%$key%")
             ->get();
     }

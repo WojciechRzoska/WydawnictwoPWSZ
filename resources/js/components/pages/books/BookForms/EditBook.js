@@ -1,7 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TextField, Input} from "@material-ui/core";
+import {Button, TextField} from "@material-ui/core";
 import { withRouter } from 'react-router-dom';
+import './EditBook.css';
 import api from "../../../../api";
+
 
 function EditBook(props) {
     const[object,setObject] = useState([]);
@@ -15,6 +17,8 @@ function EditBook(props) {
     const [ISBN, setISBN] = useState('');
     const [publisher, setPublisher] = useState('');
     const [price, setPrice] = useState('');
+    const [edit_image, setEditImage] = useState('');
+
 
     useEffect(() => {
         async function fetchMyApi() {
@@ -34,16 +38,22 @@ function EditBook(props) {
         fetchMyApi()
     },[])
 
-
+    const handlePDF = (e) =>{
+        let pdf = e.target.files[0];
+        setPdfPath(pdf);
+    }
+    const handleIMG = (e) =>{
+        let img = e.target.files[0];
+        setEditImage(img);
+    }
     const editData = e =>{
-
         e.preventDefault();
         const fData = new FormData();
         fData.append('title', title);
         fData.append('description', description);
-        fData.append('image',image_path);
+        fData.append('image',edit_image);
         fData.append('pages',pages);
-        fData.append('pdf_path',pdf_path);
+        fData.append('pdf',pdf_path);
         fData.append('year',year);
         fData.append('ISBN',ISBN);
         fData.append('publisher',publisher);
@@ -55,69 +65,91 @@ function EditBook(props) {
             }).catch(e=>{
             console.error('fail',e);
         });
-        console.warn(title, description, image_path, pages, pdf_path, year, ISBN, publisher, price);
+        window.location.reload();
     }
     return(
-        <form>
-            <TextField  id="standard-required"
-                       label="Tytuł"
-                       value={title}
-                       onChange={e => setTitle(e.target.value)} />
+        <div className='content'>
+            <div className='form'>
+            <form className='root'>
+                <TextField  id="standard-required"
+                           label="Tytuł"
+                           value={title}
+                            fullWidth
+                            multiline
+                           onChange={e => setTitle(e.target.value)} />
 
-            <TextField
-                       id="standard-required"
-                       label="Opis"
-                       value={description}
-                       onChange={e => setDescription(e.target.value)}
-            />
+                <TextField
+                           id="standard-required"
+                           label="Opis"
+                           value={description}
+                           fullWidth
+                           multiline
+                           onChange={e => setDescription(e.target.value)}
+                />
 
 
-            <TextField
-                       id="standard-required"
-                       label="Liczba stron"
-                       value={pages}
-                       onChange={e => setPages(e.target.value)}
-            />
+                <TextField
+                           id="standard-required"
+                           label="Liczba stron"
+                           value={pages}
+                           fullWidth
+                           onChange={e => setPages(e.target.value)}
+                />
 
-            <TextField
-                       id="standard-required"
-                       label="plik pdf"
-                       value={pdf_path}
-                       onChange={e => setPdfPath(e.target.value)}
-            />
-            <TextField
-                       id="standard-required"
-                       label="Rok"
-                       value={year}
-                       onChange={e => setYear(e.target.value)}
-            />
 
-            <TextField
-                       id="standard-required"
-                       label="ISBN"
-                       value={ISBN}
-                       onChange={e => setISBN(e.target.value)}
-            />
+                <TextField
+                           id="standard-required"
+                           label="Rok"
+                           value={year}
+                           fullWidth
+                           onChange={e => setYear(e.target.value)}
+                />
 
-            <TextField
-                       id="standard-required"
-                       label="wydawca"
-                       value={publisher}
-                       onChange={e => setPublisher(e.target.value)}
-            />
+                <TextField
+                           id="standard-required"
+                           label="ISBN"
+                           value={ISBN}
+                           fullWidth
+                           onChange={e => setISBN(e.target.value)}
+                />
 
-            <TextField
-                       id="standard-required"
-                       label="Cena"
-                       value={price}
-                       onChange={e => setPrice(e.target.value)}
-            />
-            <input type='file' onChange={e => setImagePath(e.target.files[0])}/>
-            <img src={`/${object.image_path}`}/>
-            <Button variant="contained"  onClick={editData} >
+                <TextField
+                           id="standard-required"
+                           label="wydawca"
+                           value={publisher}
+                           fullWidth
+                           multiline
+                           onChange={e => setPublisher(e.target.value)}
+                />
 
-            </Button>
-            </form>
+                <TextField
+                           id="standard-required"
+                           label="Cena"
+                           value={price}
+                           fullWidth
+                           onChange={e => setPrice(e.target.value)}
+                />
+
+                <input name='pdf' id='pdf' type='file' hidden onChange={handlePDF}/>
+                <label htmlFor="pdf">
+                    <Button variant="contained" color="primary" component="span">
+                        Dodaj plik
+                    </Button>
+                </label>
+                <input name='image' id='image' type='file' hidden onChange={handleIMG}/>
+                <label htmlFor="image">
+                    <Button variant="contained" color="primary" component="span">
+                        Dodaj zdjęcie
+                    </Button>
+                </label>
+
+                <Button variant="contained"  onClick={editData} >
+                    Edytuj
+                </Button>
+                </form>
+                <img id='cover' src={`/${image_path}`}/>
+            </div>
+        </div>
 
     );
 };

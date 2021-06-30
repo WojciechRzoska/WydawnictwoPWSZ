@@ -1,25 +1,34 @@
-import React from 'react';
-import {Card, CardMedia, CardContent, Typography} from "@material-ui/core";
+import React, {useState} from 'react';
+import './Book.css';
+import {Link} from "react-router-dom";
+// import { Link,} from '@material-ui/core';
+import BookInfo from './BookInfo';
 
-import useStyles from './styles';
+
 
 function Book(props) {
-    const classes = useStyles();
+
     const image = `/${props.data.image_path}`;
 
+
+
     return(
-        <Card className={classes.root}>
-            <CardMedia className={classes.media} image={image} title={props.data.title}/>
-
-            <CardContent>
-                <div className={classes.cardContent}>
-                    <Typography variant='h5' gutterBottom>
-                        {props.data.title}
-                    </Typography>
+        <div className='Box'>
+            <Link
+               to={`/info/${props.data.id}`}
+            >
+            <div className='Box-img'>
+                <img className='image' src={image} alt={props.data.title}/>
                 </div>
+            <div className='Details'>
+                <div className='Title'>
+                    {props.data.title}
+                </div>
+            </div>
+            </Link>
 
-            </CardContent>
-        </Card>
+        </div>
+
     );
 }
 
