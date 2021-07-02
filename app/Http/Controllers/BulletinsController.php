@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Bulletin;
 use Illuminate\Http\Request;
 use App\Http\Resources\Bulletin as BulletinResource;
-
+use Illuminate\Support\Facades\Storage;
 
 class BulletinsController extends Controller
 {
@@ -100,12 +100,16 @@ class BulletinsController extends Controller
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
             $finalName = date('His') . '-' . $filename;
+            Storage::delete($bulletin->image_path);
+
             $bulletin->image_path = $request->file('image')->storeAs('Bulletin_images', $finalName);
         }
         if($request->hasFile('pdf')){
             $file = $request->file('pdf');
             $filename = $file->getClientOriginalName();
             $finalName = date('His') . '-' . $filename;
+            Storage::delete($bulletin->pdf_path);
+
             $bulletin->pdf_path = $request->file('pdf')->storeAs('Bulletin_documents', $finalName);
         }
 
@@ -124,14 +128,17 @@ class BulletinsController extends Controller
      */
     public function destroy($id)
     {
-        $bulletin = Bulletin::where('id',$id)->delete();
-        if($bulletin){
+        $bulletin = Bulletin::find($id);
+        $bulletinDelete = Bulletin::where('id',$id)->delete();
+        Storage::delete($bulletin->image_path);
+        Storage::delete($bulletin->pdf_path);
+        if($bulletinDelete){
             return ['result' => 'produkt usuniety'];
         }else{
             return ['result' => 'nie udalo sie usunac produktu'];
         }
     }
-        public function search($key){
+    public function search($key){
         return Bulletin::query()
             ->where('title','Like', "%$key%")
             ->get();

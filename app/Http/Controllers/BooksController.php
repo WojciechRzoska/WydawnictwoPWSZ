@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Http\Resources\Book as BookResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -123,16 +124,18 @@ class BooksController extends Controller
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
             $finalName = date('His') . $filename;
+            Storage::delete($book->image_path);
 
-            $book->image_path = $request->file('image')->storeAs('image', $finalName);
+            $book->image_path = $request->file('image')->storeAs('Book_images', $finalName);
 
         }
         if($request->hasFile('pdf')){
             $file= $request->file('pdf');
             $filename = $file->getClientOriginalName();
             $finalName = date('His') . $filename;
+            Storage::delete($book->pdf_path);
 
-            $book->pdf_path = $request->file('pdf')->storeAs('document', $finalName);
+            $book->pdf_path = $request->file('pdf')->storeAs('Book_documents', $finalName);
         }
         $book->save();
 
@@ -149,8 +152,11 @@ class BooksController extends Controller
      */
     public function destroy($id)
     {
-        $book = Book::where('id',$id)->delete();
-        if($book){
+        $book = Book::find($id);
+        $bookDelete = Book::where('id',$id)->delete();
+        Storage::delete($book->image_path);
+        Storage::delete($book->pdf_path);
+        if($bookDelete){
             return ['result' => 'produkt usuniety'];
         }else{
             return ['result' => 'nie udalo sie usunac produktu'];
