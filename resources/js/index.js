@@ -8,6 +8,9 @@ import Books from "./components/pages/books/Books";
 import EditBook from "./components/pages/books/BookForms/EditBook";
 import BookInfo from './components/pages/books/Book/BookInfo';
 import ScrollToTop from "./ScrollToTop";
+import Bulletins from './components/pages/bulletins/Bulletins';
+import EditBulletin from "./components/pages/bulletins/BulletinForms/EditBulletin";
+import BulletinInfo from './components/pages/bulletins/Bulletin/BulletinInfo';
 
 function Index() {
     return (
@@ -18,8 +21,11 @@ function Index() {
                 <Switch>
                     <Route path='/' exact component={Home} />
                     <Route path='/books' exact component={Books}/>
-                    <Route path='/edit/:id' component={EditBook}/>
-                    <Route path='/info/:id' component={BookInfo}/>
+                    <Route path='/edit-book/:id' component={EditBook}/>
+                    <Route path='/book-info/:id' component={BookInfo}/>
+                    <Route path='/bulletins' exact component={Bulletins}/>
+                    <Route path='/edit-bulletin/:id' component={EditBulletin}/>
+                    <Route path='/bulletin-info/:id' component={BulletinInfo}/>
                 </Switch>
 
             </Router>

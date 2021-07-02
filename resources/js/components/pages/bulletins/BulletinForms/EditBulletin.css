@@ -1,0 +1,21 @@
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form{
+    padding-top: 4rem;
+    width: 500px;
+    display: flex;
+    align-items: center;
+}
+#cover{
+    width: 30%;
+    height: 30%;
+    margin-left: 20px;
+}
+label{
+    padding-top: 1rem;
+    display: flex;
+    flex-flow: column;
+}

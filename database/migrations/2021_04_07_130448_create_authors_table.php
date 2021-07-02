@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBulletinsTable extends Migration
+class CreateAuthorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateBulletinsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bulletins', function (Blueprint $table) {
+        Schema::create('authors', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('image_path');
-            $table->string('pdf_path');
+            $table->string('name');
+            $table->string('surname');
+            $table->text('biography');
+            $table->string('photo');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateBulletinsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bulletins');
+        Schema::dropIfExists('authors');
     }
 }

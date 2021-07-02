@@ -1,0 +1,27 @@
+.img{
+    width: 80%;
+    height: 80%;
+}
+
+.container{
+    padding-top:4rem;
+    padding-bottom:4rem;
+}
+
+.Info{
+    font-style: normal;
+    text-transform: uppercase;
+    color: #191d3d;
+    font-weight: 400;
+    margin-top: 2rem;
+}
+p {
+    display: block;
+    border-top: 1px solid #e2e2e3;
+    padding: 1rem 1rem 1rem 1rem;
+    margin: 0;
+
+}
+.button{
+    padding-left: 1rem;
+}

@@ -18,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('book', 'App\Http\Controllers\BooksController');
 Route::get('book/search/{key}',[\App\Http\Controllers\BooksController::class,'search']);
-
+Route::resource('bulletin', 'App\Http\Controllers\BulletinsController');
+Route::get('bulletin/search/{key}', [\App\Http\Controllers\BulletinsController::class, 'search']);
