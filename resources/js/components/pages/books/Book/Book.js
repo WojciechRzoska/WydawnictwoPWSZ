@@ -15,7 +15,7 @@ function Book(props) {
     return(
         <div className='Box'>
             <Link
-               to={`/info/${props.data.id}`}
+               to={`/book-info/${props.data.id}`}
             >
             <div className='Box-img'>
                 <img className='image' src={image} alt={props.data.title}/>

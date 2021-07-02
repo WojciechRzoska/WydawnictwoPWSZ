@@ -6,7 +6,7 @@ use App\Models\Book;
 use App\Http\Resources\Book as BookResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Intervention\Image\Facades\Image;
+
 
 
 class BooksController extends Controller
@@ -18,9 +18,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        return BookResource::collection(Book::all());
-//            $book = Book::all();
-//            return $book;
+       return BookResource::collection(Book::all());
     }
 
     /**
@@ -57,31 +55,16 @@ class BooksController extends Controller
         if($request->hasFile('image')){
             $file = $request->file('image');
             $filename = $file->getClientOriginalName();
-            $ext = $file->getClientOriginalExtension();
-            $finalName = date('His') . $filename;
-                $book->image_path = $request->file('image')->storeAs('image', $finalName);
+            $finalName = date('His') . '-' .$filename;
+                $book->image_path = $request->file('image')->storeAs('Book_images', $finalName);
         }
 
-//        if ($request->hasfile('images')) {
-//            $images = $request->file('images');
-//
-//            foreach ($images as $image) {
-//                $filename = $image->getClientOriginalName();
-//                $ext = $image->getClientOriginalExtension();
-//                $finalName = date('His') . $filename;
-//                if ($ext === 'png') {
-//                    $book->image_path = $image->storeAs('image', $finalName);
-//                } else {
-//                    $book->pdf_path = $image->storeAs('documents', $finalName);
-//
-//                }
-//            }
         if($request->hasFile('pdf')){
             $file= $request->file('pdf');
             $filename = $file->getClientOriginalName();
-            $finalName = date('His') . $filename;
+            $finalName = date('His') . '-' . $filename;
 
-            $book->pdf_path = $request->file('pdf')->storeAs('document', $finalName);
+            $book->pdf_path = $request->file('pdf')->storeAs('Book_documents', $finalName);
         }
 
             $book->save();

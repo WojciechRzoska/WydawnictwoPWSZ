@@ -26,7 +26,7 @@ export default function AddBook() {
         setOpen(false);
     };
 
-    const handlePDF = (e) =>{
+    const handlePDF = (e) => {
         let pdf = e.target.files[0];
         setPdfPath(pdf);
     }

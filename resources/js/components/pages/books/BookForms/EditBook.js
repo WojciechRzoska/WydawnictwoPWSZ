@@ -42,10 +42,12 @@ function EditBook(props) {
         let pdf = e.target.files[0];
         setPdfPath(pdf);
     }
+
     const handleIMG = (e) =>{
         let img = e.target.files[0];
         setEditImage(img);
     }
+
     const editData = e =>{
         e.preventDefault();
         const fData = new FormData();
@@ -67,6 +69,7 @@ function EditBook(props) {
         });
         window.location.reload();
     }
+
     return(
         <div className='content'>
             <div className='form'>

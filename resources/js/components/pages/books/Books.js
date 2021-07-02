@@ -5,7 +5,6 @@ import {Button, TextField} from '@material-ui/core';
 import Book from './Book/Book';
 import AddBook from "./BookForms/AddBook";
 import { Link } from 'react-router-dom';
-import EditBook from "./BookForms/EditBook";
 import Footer from "../../Footer";
 import './Books.css';
 
@@ -20,13 +19,12 @@ function Books() {
     async function deleteOperation(id){
         let result = await api.deleteBook(id);
         result=await result.data
-        console.warn(result);
         getData();
     }
     async function getData(){
         api.getAllItems().then(res => {
             const result = res.data;
-            setBooks(result.data)
+            setBooks(result.data);
         });
     }
     const renderBooks = () => {
@@ -35,7 +33,7 @@ function Books() {
                 <p>Ładowanie...</p>
             )
         }
-        if(books.length == 0){
+        if(books.length === 0){
             return(
                 <p>Brak książek</p>
             )
@@ -49,7 +47,7 @@ function Books() {
             }else {
                 return data.reverse().map((book) => (
                     <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
-                        <Link to={`/edit/${book.id}`}> edit</Link>
+                        <Link to={`/edit-book/${book.id}`}> edit</Link>
                         <Button variant="contained" onClick={() => deleteOperation(book.id)}>usuń</Button>
                         <Book data={book}/>
                     </Grid>
@@ -59,7 +57,7 @@ function Books() {
 
         return books.reverse().map((book) => (
             <Grid item key={book.id} xs={7} sm={6} md={4} lg={3}>
-                <Link to={`/edit/${book.id}`} > edit</Link>
+                <Link to={`/edit-book/${book.id}`}> edit</Link>
                 <Button variant="contained" onClick={()=>deleteOperation(book.id)}>usuń</Button>
                 <Book data={book} />
             </Grid>
@@ -73,7 +71,7 @@ function Books() {
 
     return(
         <>
-        <div className='container'>
+        <div className='Container'>
             <AddBook />
             <TextField placeholder='Szukaj produktu' onChange={(e) =>search(e.target.value)}/>
             <Grid container justify="center" >
