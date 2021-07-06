@@ -1,3 +1,5 @@
+import Bulletin from "./components/pages/bulletins/Bulletin/Bulletin";
+
 const axios = window.axios;
 
 const BASE_API_URL = 'http://127.0.0.1:8000/api'
@@ -34,7 +36,15 @@ export default{
     //magazine api
     getAllMagazines: () =>
         axios.get(`${BASE_API_URL}/magazine`),
+    addMagazine: (Magazine) =>
+        axios.post(`${BASE_API_URL}/magazine`, Magazine),
     getOneMagazine: (id) =>
         axios.get(`${BASE_API_URL}/magazine/${id}`),
+    updateMagazine: (id, Magazine) =>
+        axios.post(`${BASE_API_URL}/magazine/${id}? method=PUT`, Magazine),
+    deleteMagazine: (id) =>
+        axios.delete(`${BASE_API_URL}/magazine/${id}`),
+    searchMagazine: (key) =>
+        axios.get(`${BASE_API_URL}/magazine/search/${key}`),
 
 }

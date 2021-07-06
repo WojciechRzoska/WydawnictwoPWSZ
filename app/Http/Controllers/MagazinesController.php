@@ -6,6 +6,7 @@ use App\Models\MagazineFile;
 use Illuminate\Http\Request;
 use App\Http\Resources\Magazine as MagazineResource;
 use App\Models\Magazine;
+use Illuminate\Support\Facades\Storage;
 
 class MagazinesController extends Controller
 {
@@ -112,6 +113,19 @@ class MagazinesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $magazine = Magazine::with(['magazineFiles'])->find($id);
+//        $magazineDelete = Magazine::with(['magazineFiles'])->where('id',$id)->delete();
+//        Storage::delete($magazine->image_path);
+
+        foreach($magazine->magazine_files as $file){
+            Storage::delete($file->pdf_path);
+        }
+
+
+        if(true){
+            return ['result' => 'produkt usuniety'];
+        }else{
+            return ['result' => 'nie udalo sie usunac produktu'];
+        }
     }
 }

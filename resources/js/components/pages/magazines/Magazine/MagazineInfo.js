@@ -14,16 +14,20 @@ function MagazineInfo(props){
             let result = await api.getOneMagazine(props.match.params.id);
             result = await result.data
             setItem(result);
+
         }
         fetchMyApi()
     },[])
 
 
+    function a(){
+        if(item.magazine_files !== undefined) {
+            return item.magazine_files.map((file,i) => (
+              <a className='pdf' key={i} href={`/${file.pdf_path}`}>[pdf{i+1}]</a>
+            ));
 
-
-            const a = item.magazine_files.forEach((file) =>{
-                console.log(file)
-            })
+        }
+    }
 
 
 
@@ -45,8 +49,12 @@ function MagazineInfo(props){
                                 </p>
                                 <p className='release'>
                                     Data wydania: <span> {item.release}</span>
-                                </p>
 
+                                </p>
+                                <p>
+                                    {a()}
+
+                                </p>
                             </div>
                         </div>
 

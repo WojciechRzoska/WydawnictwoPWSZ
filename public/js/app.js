@@ -16344,6 +16344,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _components_pages_bulletins_Bulletin_Bulletin__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/pages/bulletins/Bulletin/Bulletin */ "./resources/js/components/pages/bulletins/Bulletin/Bulletin.js");
+
 var axios = window.axios;
 var BASE_API_URL = 'http://127.0.0.1:8000/api';
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -16389,8 +16391,20 @@ var BASE_API_URL = 'http://127.0.0.1:8000/api';
   getAllMagazines: function getAllMagazines() {
     return axios.get("".concat(BASE_API_URL, "/magazine"));
   },
+  addMagazine: function addMagazine(Magazine) {
+    return axios.post("".concat(BASE_API_URL, "/magazine"), Magazine);
+  },
   getOneMagazine: function getOneMagazine(id) {
     return axios.get("".concat(BASE_API_URL, "/magazine/").concat(id));
+  },
+  updateMagazine: function updateMagazine(id, Magazine) {
+    return axios.post("".concat(BASE_API_URL, "/magazine/").concat(id, "? method=PUT"), Magazine);
+  },
+  deleteMagazine: function deleteMagazine(id) {
+    return axios["delete"]("".concat(BASE_API_URL, "/magazine/").concat(id));
+  },
+  searchMagazine: function searchMagazine(key) {
+    return axios.get("".concat(BASE_API_URL, "/magazine/search/").concat(key));
   }
 });
 
@@ -18888,6 +18902,250 @@ function Bulletins() {
 
 /***/ }),
 
+/***/ "./resources/js/components/pages/magazines/MagazineForms/AddMagazine.js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/pages/magazines/MagazineForms/AddMagazine.js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AddMagazine)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Modal/Modal.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Backdrop/Backdrop.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Fade/Fade.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/TextField/TextField.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Button/Button.js");
+/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../api */ "./resources/js/api.js");
+/* harmony import */ var _stylesAdd__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./stylesAdd */ "./resources/js/components/pages/magazines/MagazineForms/stylesAdd.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+function AddMagazine() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      title = _useState2[0],
+      setTitle = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      ISSN = _useState4[0],
+      setISSN = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      release = _useState6[0],
+      setRelease = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      image_path = _useState8[0],
+      setImagePath = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      pdf_path = _useState10[0],
+      setPdfPath = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      open = _useState12[0],
+      setOpen = _useState12[1];
+
+  var classes = (0,_stylesAdd__WEBPACK_IMPORTED_MODULE_2__.default)();
+
+  var handleOpen = function handleOpen() {
+    setOpen(true);
+  };
+
+  var handleClose = function handleClose() {
+    setOpen(false);
+  };
+
+  var handlePDF = function handlePDF(e) {
+    var pdf = e.target.files;
+    setPdfPath(pdf);
+  };
+
+  var submitData = function submitData(e) {
+    e.preventDefault();
+    var fData = new FormData();
+    fData.append('title', title);
+    fData.append('ISSN', ISSN);
+    fData.append('release', release);
+    fData.append('image', image_path);
+
+    for (var i = 0; i < pdf_path.length; i++) {
+      fData.append("pdfs[".concat(i, "]"), pdf_path[i]);
+    }
+
+    _api__WEBPACK_IMPORTED_MODULE_1__.default.addMagazine(fData).then(function (res) {
+      console.log('response', res);
+    })["catch"](function (e) {
+      console.error('fail', e);
+    });
+    window.location.reload();
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+      type: "button",
+      onClick: handleOpen,
+      children: "Dodaj"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__.default, {
+      "aria-labelledby": "transition-modal-title",
+      "aria-describedby": "transition-modal-description",
+      className: classes.modal,
+      open: open,
+      onClose: handleClose,
+      closeAfterTransition: true,
+      BackdropComponent: _material_ui_core__WEBPACK_IMPORTED_MODULE_5__.default,
+      BackdropProps: {
+        timeout: 500
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_6__.default, {
+        "in": open,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: classes.paper,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            id: "transition-modal-description",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+              children: "Dodaj biuletyn"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
+              className: classes.root,
+              noValidate: true,
+              autoComplete: "off",
+              onSubmit: submitData,
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
+                required: true,
+                id: "standard-required",
+                label: "Tytu\u0142",
+                value: title,
+                onChange: function onChange(e) {
+                  return setTitle(e.target.value);
+                }
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
+                required: true,
+                id: "standard-required",
+                label: "ISSN",
+                value: ISSN,
+                onChange: function onChange(e) {
+                  return setISSN(e.target.value);
+                }
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
+                required: true,
+                id: "standard-required",
+                label: "Data wydania",
+                value: release,
+                onChange: function onChange(e) {
+                  return setRelease(e.target.value);
+                }
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                name: "image",
+                id: "image",
+                className: classes.input,
+                onChange: function onChange(e) {
+                  return setImagePath(e.target.files[0]);
+                },
+                type: "file",
+                hidden: true
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+                htmlFor: "image",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
+                  variant: "contained",
+                  color: "primary",
+                  component: "span",
+                  children: "Dodaj zdj\u0119cie"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                name: "pdf",
+                id: "pdf",
+                className: classes.input,
+                onChange: handlePDF,
+                type: "file",
+                multiple: true,
+                hidden: true
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+                htmlFor: "pdf",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
+                  variant: "contained",
+                  color: "primary",
+                  component: "span",
+                  children: "Dodaj pliki"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_8__.default, {
+                variant: "contained",
+                onClick: submitData,
+                children: "Dodaj"
+              })]
+            })]
+          })
+        })
+      })
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/magazines/MagazineForms/stylesAdd.js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/pages/magazines/MagazineForms/stylesAdd.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/makeStyles.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_0__.default)(function (theme) {
+  return {
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[2],
+      padding: theme.spacing(2, 4, 3),
+      width: '500px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    root: {
+      margin: theme.spacing(1),
+      width: '25ch'
+    }
+  };
+}));
+
+/***/ }),
+
 /***/ "./resources/js/components/pages/magazines/Magazine/Magazine.js":
 /*!**********************************************************************!*\
   !*** ./resources/js/components/pages/magazines/Magazine/Magazine.js ***!
@@ -19027,9 +19285,19 @@ function MagazineInfo(props) {
 
     fetchMyApi();
   }, []);
-  var a = item.magazine_files.forEach(function (file) {
-    console.log(file);
-  });
+
+  function a() {
+    if (item.magazine_files !== undefined) {
+      return item.magazine_files.map(function (file, i) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
+          className: "pdf",
+          href: "/".concat(file.pdf_path),
+          children: ["[pdf", i + 1, "]"]
+        }, i);
+      });
+    }
+  }
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "container",
@@ -19068,6 +19336,8 @@ function MagazineInfo(props) {
                 children: ["Data wydania: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
                   children: [" ", item.release]
                 })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+                children: a()
               })]
             })]
           })
@@ -19096,13 +19366,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../api */ "./resources/js/api.js");
-/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/Grid/Grid.js");
 /* harmony import */ var _Magazine_Magazine__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Magazine/Magazine */ "./resources/js/components/pages/magazines/Magazine/Magazine.js");
 /* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../Footer */ "./resources/js/components/Footer.js");
 /* harmony import */ var _Magazines_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Magazines.css */ "./resources/js/components/pages/magazines/Magazines.css");
 /* harmony import */ var _books_Book_Book__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../books/Book/Book */ "./resources/js/components/pages/books/Book/Book.js");
 /* harmony import */ var _books_BookForms_AddBook__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../books/BookForms/AddBook */ "./resources/js/components/pages/books/BookForms/AddBook.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _MagazineForms_AddMagazine__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./MagazineForms/AddMagazine */ "./resources/js/components/pages/magazines/MagazineForms/AddMagazine.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -19120,6 +19391,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -19171,40 +19443,40 @@ function Magazines() {
 
   var renderMagazines = function renderMagazines() {
     if (!magazines) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
         children: "\u0141adowanie..."
       });
     }
 
     if (magazines.length === 0) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("p", {
         children: "Brak czasopism"
       });
     }
 
     return magazines.reverse().map(function (magazine) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
         item: true,
         xs: 12,
         sm: 6,
         md: 4,
         lg: 3,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Magazine_Magazine__WEBPACK_IMPORTED_MODULE_3__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Magazine_Magazine__WEBPACK_IMPORTED_MODULE_3__.default, {
           data: magazine
         })
       }, magazine.id);
     });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
       className: "Container",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_9__.default, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_MagazineForms_AddMagazine__WEBPACK_IMPORTED_MODULE_8__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_material_ui_core__WEBPACK_IMPORTED_MODULE_10__.default, {
         container: true,
         justify: "center",
         children: renderMagazines()
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Footer__WEBPACK_IMPORTED_MODULE_4__.default, {})]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_Footer__WEBPACK_IMPORTED_MODULE_4__.default, {})]
   });
 }
 

@@ -7,6 +7,7 @@ import Footer from "../../Footer";
 import './Magazines.css';
 import Book from "../books/Book/Book";
 import AddBook from "../books/BookForms/AddBook";
+import AddMagazine from "./MagazineForms/AddMagazine";
 
 function Magazines(){
     const [magazines, setMagazines] = useState(null);
@@ -44,7 +45,7 @@ function Magazines(){
     return(
         <>
             <div className='Container'>
-
+            <AddMagazine/>
 
                 <Grid container justify="center" >
                     {renderMagazines()}
