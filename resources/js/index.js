@@ -11,6 +11,8 @@ import ScrollToTop from "./ScrollToTop";
 import Bulletins from './components/pages/bulletins/Bulletins';
 import EditBulletin from "./components/pages/bulletins/BulletinForms/EditBulletin";
 import BulletinInfo from './components/pages/bulletins/Bulletin/BulletinInfo';
+import Magazines from "./components/pages/magazines/Magazines";
+import MagazineInfo from "./components/pages/magazines/Magazine/MagazineInfo";
 
 function Index() {
     return (
@@ -26,6 +28,9 @@ function Index() {
                     <Route path='/bulletins' exact component={Bulletins}/>
                     <Route path='/edit-bulletin/:id' component={EditBulletin}/>
                     <Route path='/bulletin-info/:id' component={BulletinInfo}/>
+                    <Route path='/magazines' exact component={Magazines}/>
+                    <Route path='/magazine-info/:id' component={MagazineInfo}/>
+
                 </Switch>
 
             </Router>

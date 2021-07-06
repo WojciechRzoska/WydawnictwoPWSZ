@@ -8,7 +8,7 @@ import Footer from "../../../Footer";
 
 
 function BookInfo(props){
-    const[object,setObject] = useState([]);
+    const [object,setObject] = useState([]);
 
 
 

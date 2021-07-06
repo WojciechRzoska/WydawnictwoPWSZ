@@ -20,7 +20,7 @@ function CardsSection(){
                         <Card
                             src={Magazines}
                             text='Wszystkie dostępne czasopisma'
-                            path='/services'
+                            path='/bulletins'
                         />
                         <Card
                             src={Bulletin}

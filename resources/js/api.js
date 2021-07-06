@@ -30,4 +30,11 @@ export default{
         axios.delete(`${BASE_API_URL}/bulletin/${id}`),
     searchBulletin: (key) =>
         axios.get(`${BASE_API_URL}/bulletin/search/${key}`),
+
+    //magazine api
+    getAllMagazines: () =>
+        axios.get(`${BASE_API_URL}/magazine`),
+    getOneMagazine: (id) =>
+        axios.get(`${BASE_API_URL}/magazine/${id}`),
+
 }

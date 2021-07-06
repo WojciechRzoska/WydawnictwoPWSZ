@@ -58,7 +58,7 @@ function Navbar() {
                             </li>
                             <li className='Nav-item'>
                                 <NavLink exact activeClassName='Active-link'
-                                         to='/'
+                                         to='/magazines'
                                          className='Nav-links'
                                          onClick={closeMobileMenu}>
                                     Czasopisma

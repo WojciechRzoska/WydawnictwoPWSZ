@@ -73,6 +73,8 @@ return [
         public_path('Book_images') => storage_path('app/Book_images'),
         public_path('Book_documents') => storage_path('app/Book_documents'),
         public_path('Bulletin_documents') => storage_path('app/Bulletin_documents'),
+        public_path('Magazine_images') => storage_path('app/Magazine_images'),
+        public_path('Magazine_documents') => storage_path('app/Magazine_documents'),
     ],
 
 ];
