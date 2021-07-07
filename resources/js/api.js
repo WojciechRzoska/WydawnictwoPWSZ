@@ -41,10 +41,14 @@ export default{
     getOneMagazine: (id) =>
         axios.get(`${BASE_API_URL}/magazine/${id}`),
     updateMagazine: (id, Magazine) =>
-        axios.post(`${BASE_API_URL}/magazine/${id}? method=PUT`, Magazine),
+        axios.post(`${BASE_API_URL}/magazine/${id}?_method=PUT`, Magazine),
     deleteMagazine: (id) =>
         axios.delete(`${BASE_API_URL}/magazine/${id}`),
     searchMagazine: (key) =>
         axios.get(`${BASE_API_URL}/magazine/search/${key}`),
+
+    //magazine files api
+    deleteMagazineFile: (id) =>
+        axios.delete(`${BASE_API_URL}/magazine-files/${id}`),
 
 }

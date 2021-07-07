@@ -21,6 +21,8 @@ Route::get('book/search/{key}',[\App\Http\Controllers\BooksController::class,'se
 Route::resource('bulletin', 'App\Http\Controllers\BulletinsController');
 Route::get('bulletin/search/{key}', [\App\Http\Controllers\BulletinsController::class, 'search']);
 Route::resource('magazine', 'App\Http\Controllers\MagazinesController');
+Route::get('magazine/search/{key}', [\App\Http\Controllers\MagazinesController::class, 'search']);
+Route::resource('magazine-files', 'App\Http\Controllers\MagazineFilesController');
 
 //Route::get('magazine',[\App\Http\Controllers\DataTestController::class,'index']);
 

@@ -13,6 +13,7 @@ import EditBulletin from "./components/pages/bulletins/BulletinForms/EditBulleti
 import BulletinInfo from './components/pages/bulletins/Bulletin/BulletinInfo';
 import Magazines from "./components/pages/magazines/Magazines";
 import MagazineInfo from "./components/pages/magazines/Magazine/MagazineInfo";
+import EditMagazine from "./components/pages/magazines/MagazineForms/EditMagazine";
 
 function Index() {
     return (
@@ -30,6 +31,7 @@ function Index() {
                     <Route path='/bulletin-info/:id' component={BulletinInfo}/>
                     <Route path='/magazines' exact component={Magazines}/>
                     <Route path='/magazine-info/:id' component={MagazineInfo}/>
+                    <Route path='/edit-magazine/:id' component={EditMagazine}/>
 
                 </Switch>
 

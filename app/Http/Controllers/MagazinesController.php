@@ -102,7 +102,37 @@ class MagazinesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $magazine = Magazine::find($id);
+
+        $magazine->title = $request->input('title');
+        $magazine->ISSN = $request->input('ISSN');
+        $magazine->release = $request->input('release');
+
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();
+            $finalName = date('His') . '-' . $filename;
+            Storage::delete($magazine->image_path);
+
+            $magazine->image_path = $request->file('image')->storeAs('Magazine_images', $finalName);
+        }
+        $magazine->save();
+
+        if($request->hasFile('pdfs')){
+            foreach($request->pdfs as $pdf){
+                $filename = $pdf->getClientOriginalName();
+                $finalName = date('His') . '-' . $filename;
+
+
+                $file = new MagazineFile();
+                $file->magazine_id = $magazine->id;
+                $file->pdf_path = $pdf->storeAs('Magazine_documents',$finalName);
+                $file->save();
+            }
+        }
+        return response()->json([
+            'data' => 'edycja udana'
+        ]);
     }
 
     /**
@@ -113,19 +143,26 @@ class MagazinesController extends Controller
      */
     public function destroy($id)
     {
-        $magazine = Magazine::with(['magazineFiles'])->find($id);
-//        $magazineDelete = Magazine::with(['magazineFiles'])->where('id',$id)->delete();
-//        Storage::delete($magazine->image_path);
+        $magazine = Magazine::with(['magazineFiles'])->find($id)->toArray();
+        Storage::delete($magazine['image_path']);
 
-        foreach($magazine->magazine_files as $file){
-            Storage::delete($file->pdf_path);
+        foreach($magazine['magazine_files'] as $file){
+            Storage::delete($file['pdf_path']);
         }
 
+        $magazineDelete = Magazine::with(['magazineFiles'])->where('id',$id)->delete();
 
-        if(true){
+
+        if($magazineDelete){
             return ['result' => 'produkt usuniety'];
         }else{
             return ['result' => 'nie udalo sie usunac produktu'];
         }
+    }
+
+    public function search($key){
+        return Magazine::query()
+            ->where('title','Like', "%$key%")
+            ->get();
     }
 }
