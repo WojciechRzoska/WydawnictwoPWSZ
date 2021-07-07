@@ -120,6 +120,7 @@ export default function AddBook() {
                                     <Button variant="contained" color="primary" component="span">
                                         Dodaj zdjęcie
                                     </Button>
+                                    <p>{image_path.name}</p>
                                 </label>
 
                                 <input
@@ -134,7 +135,9 @@ export default function AddBook() {
                                     <Button variant="contained" color="primary" component="span">
                                         Dodaj plik
                                     </Button>
+                                    <p>{pdf_path.name}</p>
                                 </label>
+
 
                                 <Button variant="contained"  onClick={submitData} >
                                     Dodaj

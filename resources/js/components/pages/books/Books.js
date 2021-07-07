@@ -38,6 +38,7 @@ function Books() {
                 <p>Brak książek</p>
             )
         }
+        let reverseBook = books.map(item=>item).reverse();
         if(searchData){
             let data = searchData;
             if(data.length === 0){
@@ -45,7 +46,8 @@ function Books() {
                     <p> Nie znaleziono takiej książki </p>
                 )
             }else {
-                return data.reverse().map((book) => (
+                let reverseData = data.map(item=>item).reverse();
+                return reverseData.map((book) => (
                     <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
                         <Link to={`/edit-book/${book.id}`}> edit</Link>
                         <Button variant="contained" onClick={() => deleteOperation(book.id)}>usuń</Button>
@@ -55,7 +57,7 @@ function Books() {
             }
         }
 
-        return books.reverse().map((book) => (
+        return reverseBook.map((book) => (
             <Grid item key={book.id} xs={7} sm={6} md={4} lg={3}>
                 <Link to={`/edit-book/${book.id}`}> edit</Link>
                 <Button variant="contained" onClick={()=>deleteOperation(book.id)}>usuń</Button>

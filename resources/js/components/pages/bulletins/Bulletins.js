@@ -19,7 +19,7 @@ function Bulletins(){
         let result = await api.deleteBulletin(id);
         result=await result.data
         console.warn(result);
-        getData();
+        getData(); //?
     }
     async function getData(){
         api.getAllBulletins().then(res => {
@@ -46,6 +46,7 @@ function Bulletins(){
                 <p>Brak biuletynów</p>
             )
         }
+        let reverseBulletin = bulletins.map(item=>item).reverse();
         if(searchData){
             let data = searchData;
             if(data.length === 0){
@@ -53,7 +54,8 @@ function Bulletins(){
                     <p> Nie znaleziono takiego biuletynu </p>
                 )
             }else {
-                return data.reverse().map((bulletin) => (
+                let reverseData = data.map(item=>item).reverse();
+                return reverseData.map((bulletin) => (
                     <Grid item key={bulletin.id} xs={12} sm={6} md={4} lg={3}>
                         <Link to={`/edit-bulletin/${bulletin.id}`}>Edit</Link>
                         <Button variant='contained' onClick={() => deleteOperation(bulletin.id)}>Usuń</Button>
@@ -62,7 +64,7 @@ function Bulletins(){
                 ))
             }
         }
-        return bulletins.reverse().map((bulletin) =>  (
+        return reverseBulletin.map((bulletin) =>  (
             <Grid item key={bulletin.id} xs={12} sm={6} md={4} lg={3}>
                 <Link to={`/edit-bulletin/${bulletin.id}`}>Edit</Link>
                 <Button variant='contained' onClick={() => deleteOperation(bulletin.id)}>Usuń</Button>

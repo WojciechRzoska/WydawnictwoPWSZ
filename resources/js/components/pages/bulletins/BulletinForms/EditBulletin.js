@@ -47,7 +47,7 @@ function EditBulletin(props) {
             }).catch(e=>{
                 console.error('fail',e);
         });
-        // window.location.reload();
+         window.location.reload();
 
     }
 
