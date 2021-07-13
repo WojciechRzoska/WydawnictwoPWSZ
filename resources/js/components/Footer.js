@@ -44,7 +44,7 @@ function Footer() {
                         <h2>Media społecznościowe</h2>
                         <div className='Socials-icons'>
                             <Link
-                                class='Social-icon-link'
+                                className='Social-icon-link'
                                 to='/'
                                 target='_blank'
                                 aria-label='Facebook'
@@ -52,7 +52,7 @@ function Footer() {
                                 <i className='fab fa-facebook-f'/>
                             </Link>
                             <Link
-                                class='Social-icon-link'
+                                className='Social-icon-link'
                                 to='/'
                                 target='_blank'
                                 aria-label='Instagram'
@@ -60,7 +60,7 @@ function Footer() {
                                 <i className='fab fa-instagram'/>
                             </Link>
                             <Link
-                                class='Social-icon-link'
+                                className='Social-icon-link'
                                 to='/'
                                 target='_blank'
                                 aria-label='Youtube'
@@ -68,7 +68,7 @@ function Footer() {
                                 <i className='fab fa-youtube'/>
                             </Link>
                             <Link
-                                class='Social-icon-link twitter'
+                                className='Social-icon-link twitter'
                                 to='/'
                                 target='_blank'
                                 aria-label='Twitter'

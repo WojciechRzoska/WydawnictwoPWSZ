@@ -1,5 +1,3 @@
-import Bulletin from "./components/pages/bulletins/Bulletin/Bulletin";
-
 const axios = window.axios;
 
 const BASE_API_URL = 'http://127.0.0.1:8000/api'
@@ -50,5 +48,16 @@ export default{
     //magazine files api
     deleteMagazineFile: (id) =>
         axios.delete(`${BASE_API_URL}/magazine-files/${id}`),
+
+
+    //account api
+    login:(Account) =>
+        axios.post(`${BASE_API_URL}/login`, Account),
+    getDataUser:() =>
+        axios.get(`${BASE_API_URL}/user`),
+    forgetPassword:(Email) =>
+        axios.post(`${BASE_API_URL}/forgetpassword`, Email),
+    resetPassword:(Data) =>
+        axios.post(`${BASE_API_URL}/resetpassword`, Data),
 
 }

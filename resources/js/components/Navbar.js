@@ -1,34 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { Button } from "./Button";
 import './Navbar.css';
 import Logo from '../../images/WhiteLogo.png';
+import api from "../api";
+import { Link } from '@material-ui/core';
 
 
 
-function Navbar() {
-
+function Navbar(props) {
     const [click, setClick] = useState(false);
-    const [button, setButton] = useState(true);
 
     const handleClick = () => setClick(!click);
+
+    let history = useHistory();
 
 
     const closeMobileMenu = () => setClick(false);
 
-    const showButton = () => {
-        if (window.innerWidth <= 960) {
-            setButton(false);
-        } else {
-            setButton(true);
+    const logout = () =>{
+        history.push('/');
+        localStorage.clear();
+        props.settingUser(null);
+        history.go(0)
+    }
+
+    const Login = () =>{
+        if(localStorage.getItem('token')){
+            return(
+            <li className='Nav-item'>
+            <Link component="button" onClick={logout} className='Nav-links'>Wyloguj</Link>
+            </li>)
+
+
+
+        }else {
+            return (
+                <li className='Nav-item'>
+                <NavLink to='/login' className='Nav-links'>Zaloguj</NavLink>
+                </li>
+            )
         }
-    };
-    useEffect(() => {
-        showButton();
-    }, []);
 
-
-    window.addEventListener('resize', showButton);
+    }
 
         return (
             <>
@@ -66,17 +80,12 @@ function Navbar() {
                                     Czasopisma
                                 </NavLink>
                             </li>
-                            <li>
-                                <NavLink
-                                    exact activeClassName='Active-link'
-                                    to='/sign-up'
-                                    className='Nav-links-mobile'
-                                    onClick={closeMobileMenu}>
-                                    Sign Up
-                                </NavLink>
-                            </li>
+                            {Login()}
+
+
                         </ul>
-                        {button && <Button buttonStyle={'btn--outline'}>Zaloguj</Button>}
+
+
                     </div>
                 </nav>
             </>

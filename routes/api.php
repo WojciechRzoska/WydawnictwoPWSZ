@@ -14,8 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Account routes
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'Login']);
+Route::post('/register', [\App\Http\Controllers\AuthController::class, 'Register']);
+Route::post('/forgetpassword', [\App\Http\Controllers\ForgetPasswordController::class, 'ForgetPassword']);
+Route::post('/resetpassword', [\App\Http\Controllers\ResetPasswordController::class, 'ResetPassword']);
+Route::get('user',[\App\Http\Controllers\UserController::class, 'User'])->middleware('auth:api');
 
 
+
+//Modules routes
 Route::resource('book', 'App\Http\Controllers\BooksController');
 Route::get('book/search/{key}',[\App\Http\Controllers\BooksController::class,'search']);
 Route::resource('bulletin', 'App\Http\Controllers\BulletinsController');
@@ -24,7 +32,7 @@ Route::resource('magazine', 'App\Http\Controllers\MagazinesController');
 Route::get('magazine/search/{key}', [\App\Http\Controllers\MagazinesController::class, 'search']);
 Route::resource('magazine-files', 'App\Http\Controllers\MagazineFilesController');
 
-//Route::get('magazine',[\App\Http\Controllers\DataTestController::class,'index']);
+
 
 
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -14,32 +14,20 @@ import BulletinInfo from './components/pages/bulletins/Bulletin/BulletinInfo';
 import Magazines from "./components/pages/magazines/Magazines";
 import MagazineInfo from "./components/pages/magazines/Magazine/MagazineInfo";
 import EditMagazine from "./components/pages/magazines/MagazineForms/EditMagazine";
+import Login from "./components/pages/account/Login";
+import Panel from "./components/pages/account/Panel";
+import Header from "./Header";
 
-function Index() {
-    return (
-        <>
-            <Router>
-                <ScrollToTop/>
-                <Navbar/>
-                <Switch>
-                    <Route path='/' exact component={Home} />
-                    <Route path='/books' exact component={Books}/>
-                    <Route path='/edit-book/:id' component={EditBook}/>
-                    <Route path='/book-info/:id' component={BookInfo}/>
-                    <Route path='/bulletins' exact component={Bulletins}/>
-                    <Route path='/edit-bulletin/:id' component={EditBulletin}/>
-                    <Route path='/bulletin-info/:id' component={BulletinInfo}/>
-                    <Route path='/magazines' exact component={Magazines}/>
-                    <Route path='/magazine-info/:id' component={MagazineInfo}/>
-                    <Route path='/edit-magazine/:id' component={EditMagazine}/>
 
-                </Switch>
+const axios = window.axios;
+axios.defaults.headers.common['Authorization']='Bearer '+localStorage.getItem('token')
 
-            </Router>
+function Index(){
 
-        </>
+        return (
+            <Header/>
+        );
 
-    );
 }
 
 export default Index;

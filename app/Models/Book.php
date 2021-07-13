@@ -14,8 +14,4 @@ class Book extends Model
     ];
 
 
-
-    public function getAuthorRelation(){
-        return $this->belongsToMany('App\Author', 'book_authors','book_id','author_id');
-    }
 }

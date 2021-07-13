@@ -5,8 +5,8 @@ import Magazine from "./Magazine/Magazine";
 import {Link} from 'react-router-dom';
 import Footer from "../../Footer";
 import './Magazines.css';
-
 import AddMagazine from "./MagazineForms/AddMagazine";
+
 
 function Magazines(){
     const [magazines, setMagazines] = useState(null);
