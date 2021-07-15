@@ -1,40 +1,47 @@
-.container{
-    height:100vh;
+.container {
+    height: 100vh;
     display: flex;
 }
-.sizeLogin{
-    padding :20px;
-    height:32vh;
-    width:350px;
-    margin:20px auto;
+
+.sizeLogin {
+    padding: 20px;
+    height: 32vh;
+    width: 350px;
+    margin: 20px auto;
 }
-.navigate{
+
+.navigate {
     padding-top: 10px;
 }
-.item{
+
+.item {
     display: flex;
     margin: auto;
-    top:0;
+    top: 0;
     bottom: 0;
-    left:0;
-    right:0;
+    left: 0;
+    right: 0;
 
 }
-.forget, .login{
+
+.forget, .login {
     float: left;
 }
-.navigateForget{
+
+.navigateForget {
     padding-top: 20px;
 }
-.sizeReset{
-    padding :20px;
-    height:40vh;
-    width:350px;
-    margin:20px auto;
+
+.sizeReset {
+    padding: 20px;
+    height: 40vh;
+    width: 350px;
+    margin: 20px auto;
 }
-.sizeForget{
-    padding :20px;
-    height:28vh;
-    width:350px;
-    margin:20px auto;
+
+.sizeForget {
+    padding: 20px;
+    height: 30vh;
+    width: 350px;
+    margin: 20px auto;
 }

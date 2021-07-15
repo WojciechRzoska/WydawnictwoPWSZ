@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {withRouter} from 'react-router-dom';
+import {withRouter, Redirect, useHistory} from 'react-router-dom';
 import {Button, TextField} from "@material-ui/core";
 import api from '../../../../api';
 import './EditMagazine.css';
@@ -14,6 +14,12 @@ function EditMagazine(props) {
     const [edit_image, setEditImage] = useState('');
     const [edit_pdf, setEditPDF] = useState('');
 
+    let history = useHistory();
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to={'/login'}/>
+    }
+
     useEffect(() => {
         async function fetchMyApi() {
             let result = await api.getOneMagazine(props.match.params.id);
@@ -25,8 +31,9 @@ function EditMagazine(props) {
             setImagePath(result.image_path);
 
         }
+
         fetchMyApi()
-    },[])
+    }, [])
 
     const handlePDF = (e) => {
         let pdfs = e.target.files;
@@ -38,12 +45,12 @@ function EditMagazine(props) {
         setEditImage(img);
     }
 
-    async function deleteOperation(id){
-         await api.deleteMagazineFile(id);
-         window.location.reload();
+    async function deleteOperation(id) {
+        await api.deleteMagazineFile(id);
+        window.location.reload();
     }
 
-    const editData = e =>{
+    const editData = e => {
         e.preventDefault();
         const fData = new FormData();
         fData.append('title', title);
@@ -56,17 +63,17 @@ function EditMagazine(props) {
 
         api.updateMagazine(item.id, fData)
             .then(res => {
-                console.log('response',res);
-            }).catch(e=>{
-            console.error('fail',e);
+                console.log('response', res);
+            }).catch(e => {
+            console.error('fail', e);
         });
-
+        history.goBack();
 
     }
 
     function files() {
-        if(item.magazine_files !== undefined) {
-            return item.magazine_files.map((file,i) => (
+        if (item.magazine_files !== undefined) {
+            return item.magazine_files.map((file, i) => (
                 <p className='pdf' key={i}>{file.pdf_path}
                     <Button variant='contained' onClick={() => deleteOperation(file.id)}>Usuń</Button>
                 </p>
@@ -75,28 +82,29 @@ function EditMagazine(props) {
             ));
         }
     }
-    return(
+
+    return (
         <div className='content'>
             <div className='form'>
                 <form className='root'>
-                    <TextField  id="standard-required"
-                                label="Tytuł"
-                                value={title}
-                                fullWidth
-                                multiline
-                                onChange={e => setTitle(e.target.value)} />
-                    <TextField  id="standard-required"
-                                label="ISSN"
-                                value={ISSN}
-                                fullWidth
-                                multiline
-                                onChange={e => setISSN(e.target.value)} />
-                    <TextField  id="standard-required"
-                                label="Data wydania"
-                                value={release}
-                                fullWidth
-                                multiline
-                                onChange={e => set(e.target.value)} />
+                    <TextField id="standard-required"
+                               label="Tytuł"
+                               value={title}
+                               fullWidth
+                               multiline
+                               onChange={e => setTitle(e.target.value)}/>
+                    <TextField id="standard-required"
+                               label="ISSN"
+                               value={ISSN}
+                               fullWidth
+                               multiline
+                               onChange={e => setISSN(e.target.value)}/>
+                    <TextField id="standard-required"
+                               label="Data wydania"
+                               value={release}
+                               fullWidth
+                               multiline
+                               onChange={e => set(e.target.value)}/>
 
                     {files()}
                     <input name='image' id='image' type='file' hidden onChange={handleIMG}/>
@@ -111,7 +119,7 @@ function EditMagazine(props) {
                             Dodaj pliki
                         </Button>
                     </label>
-                    <Button variant="contained"  onClick={editData} >
+                    <Button variant="contained" onClick={editData}>
                         Edytuj
                     </Button>
                 </form>
@@ -120,4 +128,5 @@ function EditMagazine(props) {
         </div>
     )
 }
+
 export default withRouter(EditMagazine);

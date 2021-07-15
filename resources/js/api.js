@@ -44,6 +44,8 @@ export default{
         axios.delete(`${BASE_API_URL}/magazine/${id}`),
     searchMagazine: (key) =>
         axios.get(`${BASE_API_URL}/magazine/search/${key}`),
+    getAllMagazinesWithFiles: () =>
+        axios.get(`${BASE_API_URL}/magazines`),
 
     //magazine files api
     deleteMagazineFile: (id) =>
@@ -59,5 +61,15 @@ export default{
         axios.post(`${BASE_API_URL}/forgetpassword`, Email),
     resetPassword:(Data) =>
         axios.post(`${BASE_API_URL}/resetpassword`, Data),
+    getUsers:() =>
+        axios.get(`${BASE_API_URL}/handle-user`),
+    getOneUser:(id) =>
+        axios.get(`${BASE_API_URL}/handle-user/${id}`),
+    updateUser:(id, User) =>
+        axios.post(`${BASE_API_URL}/handle-user/${id}? method=PUT`, User),
+    deleteUser:(id) =>
+        axios.delete(`${BASE_API_URL}/handle-user/${id}`),
+    addUser:(User) =>
+        axios.post(`${BASE_API_URL}/handle-user`,User),
 
 }

@@ -1,0 +1,18 @@
+.content {
+    flex-flow: column;
+    align-items: center;
+    max-width: 800px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 4rem 4rem 12rem 4rem;
+    min-height: 500px;
+
+}
+
+.select {
+    padding-top: 10px;
+}
+
+.submitButton {
+    padding-top: 10px;
+}

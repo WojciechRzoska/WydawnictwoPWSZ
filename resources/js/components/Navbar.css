@@ -25,7 +25,7 @@ img {
 
 .Nav-menu {
     display: grid;
-    grid-template-columns: repeat(4, auto);
+    grid-template-columns: repeat(6, auto);
     grid-gap: 10px;
     list-style: none;
     text-align: center;
@@ -34,15 +34,18 @@ img {
     margin-right: 2rem;
 
 }
-.Navbar-logout{
-    color:#fff;
+
+.Navbar-logout {
+    color: #fff;
 }
-.Navbar-login{
-    color:#fff
+
+.Navbar-login {
+    color: #fff
 }
+
 .Nav-item {
     height: 80px;
-    margin-top:1rem;
+    margin-top: 1rem;
 }
 
 .Nav-links {
@@ -54,11 +57,12 @@ img {
     height: 100%;
 
 }
-.Nav-links:hover{
-    color:#fff;
+
+.Nav-links:hover {
+    color: #fff;
 }
 
-.Active-link{
+.Active-link {
     color: #0a7ae5;
     border-bottom: 1px solid #fff;
 }
@@ -78,7 +82,7 @@ img {
 }
 
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1080px) {
     .NavbarItems {
         position: relative;
     }

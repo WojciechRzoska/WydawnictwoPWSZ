@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, useHistory, Redirect} from 'react-router-dom';
 import {Button, TextField} from "@material-ui/core";
 import api from '../../../../api';
 import './EditBulletin.css';
@@ -12,6 +12,12 @@ function EditBulletin(props) {
     const [pdf_path, setPdfPath] = useState('');
     const [edit_image, setEditImage] = useState('');
 
+    let history = useHistory();
+
+    if (!localStorage.getItem('token')) {
+        return <Redirect to={'/login'}/>
+    }
+
     useEffect(() => {
         async function fetchMyApi() {
             let result = await api.getOneBulletin(props.match.params.id);
@@ -21,6 +27,7 @@ function EditBulletin(props) {
             setImagePath(result.image_path);
             setPdfPath(result.pdf_path);
         }
+
         fetchMyApi()
     }, [])
 
@@ -34,7 +41,7 @@ function EditBulletin(props) {
         setEditImage(img);
     }
 
-    const editData = e =>{
+    const editData = e => {
         e.preventDefault();
         const fData = new FormData();
         fData.append('title', title);
@@ -43,24 +50,24 @@ function EditBulletin(props) {
 
         api.updateBulletin(object.id, fData)
             .then(res => {
-                console.log('response',res);
-            }).catch(e=>{
-                console.error('fail',e);
+                console.log('response', res);
+            }).catch(e => {
+            console.error('fail', e);
         });
-         window.location.reload();
+        history.goBack();
 
     }
 
-    return(
+    return (
         <div className='content'>
             <div className='form'>
                 <form className='root'>
-                    <TextField  id="standard-required"
-                                label="Tytuł"
-                                value={title}
-                                fullWidth
-                                multiline
-                                onChange={e => setTitle(e.target.value)} />
+                    <TextField id="standard-required"
+                               label="Tytuł"
+                               value={title}
+                               fullWidth
+                               multiline
+                               onChange={e => setTitle(e.target.value)}/>
                     <input name='image' id='image' type='file' hidden onChange={handleIMG}/>
                     <label htmlFor="image">
                         <Button variant="contained" color="primary" component="span">
@@ -73,7 +80,7 @@ function EditBulletin(props) {
                             Dodaj plik
                         </Button>
                     </label>
-                    <Button variant="contained"  onClick={editData} >
+                    <Button variant="contained" onClick={editData}>
                         Edytuj
                     </Button>
                 </form>

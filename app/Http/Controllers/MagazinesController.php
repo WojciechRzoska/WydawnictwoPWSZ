@@ -165,4 +165,8 @@ class MagazinesController extends Controller
             ->where('title','Like', "%$key%")
             ->get();
     }
+
+    public function getAll(){
+        return Magazine::with(['magazineFiles'])->get();
+    }
 }

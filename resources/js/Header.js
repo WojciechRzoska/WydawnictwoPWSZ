@@ -13,10 +13,19 @@ import Magazines from "./components/pages/magazines/Magazines";
 import MagazineInfo from "./components/pages/magazines/Magazine/MagazineInfo";
 import EditMagazine from "./components/pages/magazines/MagazineForms/EditMagazine";
 import Login from "./components/pages/account/Login";
-import Panel from "./components/pages/account/Panel";
+import AdminPanel from "./components/pages/account/AdminPanel";
 import Forget from "./components/pages/account/Forget";
 import Reset from "./components/pages/account/Reset";
+import AddUser from "./components/pages/account/AccountForms/AddUser";
+import MagazineTable from "./components/pages/account/AccountForms/MagazineTable";
+import AddMagazine from "./components/pages/magazines/MagazineForms/AddMagazine";
+import BulletinTable from "./components/pages/account/AccountForms/BulletinTable";
+import AddBulletin from "./components/pages/bulletins/BulletinForms/AddBulletin";
+import BookTable from "./components/pages/account/AccountForms/BookTable";
+import AddBook from "./components/pages/books/BookForms/AddBook";
 import api from "./api";
+
+
 
 
 
@@ -57,9 +66,17 @@ function Header(){
                     <Route path='/magazine-info/:id' component={MagazineInfo}/>
                     <Route path='/edit-magazine/:id' component={EditMagazine}/>
                     <Route path='/login' exact component={()=> <Login user={user} settingUser={settingUser}/>}/>
-                    <Route path='/panel' exact component={()=> <Panel user={user} />}/>
+                    <Route path='/admin-panel' exact component={()=> <AdminPanel user={user} />}/>
                     <Route path='/forget' exact component={Forget}/>
                     <Route path='/reset/:id' exact component={Reset}/>
+                    <Route path='/add-user' exact component={AddUser}/>
+                    <Route path='/magazine-panel' exact component={MagazineTable}/>
+                    <Route path='/add-magazine' exact component={AddMagazine}/>
+                    <Route path='/add-bulletin' exact component={AddBulletin}/>
+                    <Route path='/bulletin-panel' exact component={BulletinTable}/>
+                    <Route path='/book-panel' exact component={BookTable}/>
+                    <Route path='/add-book' exact component={AddBook}/>
+
 
                 </Switch>
 

@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import { Button } from "./Button";
+import React, {useState, useEffect} from 'react';
+import {NavLink, Redirect, useHistory} from 'react-router-dom';
 import './Navbar.css';
 import Logo from '../../images/WhiteLogo.png';
 import api from "../api";
-import { Link } from '@material-ui/core';
-
+import {Link} from '@material-ui/core';
 
 
 function Navbar(props) {
@@ -18,78 +16,98 @@ function Navbar(props) {
 
     const closeMobileMenu = () => setClick(false);
 
-    const logout = () =>{
+    const logout = () => {
         history.push('/');
         localStorage.clear();
         props.settingUser(null);
         history.go(0)
     }
 
-    const Login = () =>{
-        if(localStorage.getItem('token')){
-            return(
-            <li className='Nav-item'>
-            <Link component="button" onClick={logout} className='Nav-links'>Wyloguj</Link>
-            </li>)
+    const Login = () => {
+        if (localStorage.getItem('token')) {
+            if (localStorage.getItem('role') === 'admin') {
+                return (
+                    <>
+                        <li className='Nav-item'>
+                            <NavLink to='/admin-panel' onClick={closeMobileMenu} className='Nav-links'>Admin</NavLink>
+                        </li>
+                        <li className='Nav-item'>
+                            <NavLink to='/book-panel' onClick={closeMobileMenu} className='Nav-links'>Panel</NavLink>
+                        </li>
+                        <li className='Nav-item'>
+                            <NavLink to='/#' onClick={logout} className='Nav-links'>Wyloguj</NavLink>
+                        </li>
+                    </>
+                )
+            } else {
+                return (
+                    <>
+                        <li className='Nav-item'>
+                            <NavLink to='/book-panel' onClick={closeMobileMenu} className='Nav-links'>Panel</NavLink>
+                        </li>
+                        <li className='Nav-item'>
+                            <NavLink to='/#' onClick={logout} className='Nav-links'>Wyloguj</NavLink>
+                        </li>
+                    </>
+                )
+            }
 
-
-
-        }else {
+        } else {
             return (
                 <li className='Nav-item'>
-                <NavLink to='/login' className='Nav-links'>Zaloguj</NavLink>
+                    <NavLink to='/login' className='Nav-links' onClick={closeMobileMenu}>Zaloguj</NavLink>
                 </li>
             )
         }
 
     }
 
-        return (
-            <>
-                <nav className='Navbar'>
-                    <div className='Navbar-container'>
+    return (
+        <>
+            <nav className='Navbar'>
+                <div className='Navbar-container'>
 
-                        <NavLink to='/' className='Navbar-Logo'>
-                            <img src={Logo} alt='logo'/>
-                        </NavLink>
-                        <div className='Menu-icon' onClick={handleClick}>
-                            <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
-                        </div>
-                        <ul className={click ? 'Nav-menu active' : 'Nav-menu'}>
-                            <li className='Nav-item'>
-                                <NavLink exact activeClassName='Active-link'
-                                         to='/books'
-                                         className='Nav-links'
-                                         onClick={closeMobileMenu}>
-                                    Sklep
-                                </NavLink>
-                            </li>
-                            <li className='Nav-item'>
-                                <NavLink exact activeClassName='Active-link'
-                                         to='/bulletins'
-                                         className='Nav-links'
-                                         onClick={closeMobileMenu}>
-                                    Biuletyny
-                                </NavLink>
-                            </li>
-                            <li className='Nav-item'>
-                                <NavLink exact activeClassName='Active-link'
-                                         to='/magazines'
-                                         className='Nav-links'
-                                         onClick={closeMobileMenu}>
-                                    Czasopisma
-                                </NavLink>
-                            </li>
-                            {Login()}
-
-
-                        </ul>
-
-
+                    <NavLink to='/' className='Navbar-Logo'>
+                        <img src={Logo} alt='logo'/>
+                    </NavLink>
+                    <div className='Menu-icon' onClick={handleClick}>
+                        <i className={click ? 'fas fa-times' : 'fas fa-bars'}/>
                     </div>
-                </nav>
-            </>
-        )
+                    <ul className={click ? 'Nav-menu active' : 'Nav-menu'}>
+                        <li className='Nav-item'>
+                            <NavLink exact activeClassName='Active-link'
+                                     to='/books'
+                                     className='Nav-links'
+                                     onClick={closeMobileMenu}>
+                                Sklep
+                            </NavLink>
+                        </li>
+                        <li className='Nav-item'>
+                            <NavLink exact activeClassName='Active-link'
+                                     to='/bulletins'
+                                     className='Nav-links'
+                                     onClick={closeMobileMenu}>
+                                Biuletyny
+                            </NavLink>
+                        </li>
+                        <li className='Nav-item'>
+                            <NavLink exact activeClassName='Active-link'
+                                     to='/magazines'
+                                     className='Nav-links'
+                                     onClick={closeMobileMenu}>
+                                Czasopisma
+                            </NavLink>
+                        </li>
+                        {Login()}
+
+
+                    </ul>
+
+
+                </div>
+            </nav>
+        </>
+    )
 }
 
 export default Navbar;

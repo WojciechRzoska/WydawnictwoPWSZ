@@ -20,6 +20,9 @@ Route::post('/register', [\App\Http\Controllers\AuthController::class, 'Register
 Route::post('/forgetpassword', [\App\Http\Controllers\ForgetPasswordController::class, 'ForgetPassword']);
 Route::post('/resetpassword', [\App\Http\Controllers\ResetPasswordController::class, 'ResetPassword']);
 Route::get('user',[\App\Http\Controllers\UserController::class, 'User'])->middleware('auth:api');
+Route::resource('handle-user','App\Http\Controllers\UserController');
+
+
 
 
 
@@ -31,7 +34,7 @@ Route::get('bulletin/search/{key}', [\App\Http\Controllers\BulletinsController::
 Route::resource('magazine', 'App\Http\Controllers\MagazinesController');
 Route::get('magazine/search/{key}', [\App\Http\Controllers\MagazinesController::class, 'search']);
 Route::resource('magazine-files', 'App\Http\Controllers\MagazineFilesController');
-
+Route::get('magazines', [\App\Http\Controllers\MagazinesController::class, 'getAll']);
 
 
 
