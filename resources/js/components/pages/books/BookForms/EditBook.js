@@ -18,6 +18,7 @@ function EditBook(props) {
     const [publisher, setPublisher] = useState('');
     const [price, setPrice] = useState('');
     const [edit_image, setEditImage] = useState('');
+    const [quantity, setQuantity] = useState('');
 
     let history = useHistory();
 
@@ -39,6 +40,7 @@ function EditBook(props) {
             setISBN(result.ISBN);
             setPublisher(result.publisher);
             setPrice(result.price);
+            setQuantity(result.quantity);
         }
 
         fetchMyApi()
@@ -66,6 +68,8 @@ function EditBook(props) {
         fData.append('ISBN', ISBN);
         fData.append('publisher', publisher);
         fData.append('price', price);
+        fData.append('quantity', quantity);
+
 
         api.updateBook(object.id, fData)
             .then(res => {
@@ -137,6 +141,13 @@ function EditBook(props) {
                         value={price}
                         fullWidth
                         onChange={e => setPrice(e.target.value)}
+                    />
+                    <TextField
+                        id="standard-required"
+                        label="Ilość dostępnych egzemplarzy"
+                        value={quantity}
+                        fullWidth
+                        onChange={e => setQuantity(e.target.value)}
                     />
 
                     <input name='pdf' id='pdf' type='file' hidden onChange={handlePDF}/>

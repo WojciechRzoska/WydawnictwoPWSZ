@@ -1,32 +1,28 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Book.css';
 import {Link} from "react-router-dom";
-// import { Link,} from '@material-ui/core';
-import BookInfo from './BookInfo';
+import Grid from "@material-ui/core/Grid";
+import {Button} from "@material-ui/core";
 
 
 
 function Book(props) {
-
     const image = `/${props.data.image_path}`;
 
 
 
-    return(
-        <div className='Box'>
-            <Link
-               to={`/book-info/${props.data.id}`}
-            >
-            <div className='Box-img'>
-                <img className='image' src={image} alt={props.data.title}/>
-                </div>
-            <div className='Details'>
-                <div className='Title'>
-                    {props.data.title}
-                </div>
-            </div>
-            </Link>
 
+    return(
+        <div className='cardData'>
+            <div className='cardImage'>
+                <Link
+                       to={`/book-info/${props.data.id}`}
+                    >
+                    <div className='item-img'>
+                        <img className='imag' src={image} alt={props.data.title}/>
+                        </div>
+                    </Link>
+            </div>
         </div>
 
     );

@@ -14,6 +14,7 @@ export default function AddBook() {
     const [ISBN, setISBN] = useState('');
     const [publisher, setPublisher] = useState('');
     const [price, setPrice] = useState('');
+    const [quantity, setQuantity] = useState('');
 
     let history = useHistory();
 
@@ -42,6 +43,8 @@ export default function AddBook() {
         fData.append('ISBN', ISBN);
         fData.append('publisher', publisher);
         fData.append('price', price);
+        fData.append('quantity', quantity);
+
 
         api.addBook(fData)
             .then(res => {
@@ -99,6 +102,11 @@ export default function AddBook() {
                                value={price}
                                fullWidth
                                onChange={e => setPrice(e.target.value)}/>
+                    <TextField required id="standard-required"
+                               label="Ilość dostępnych egzemplarzy"
+                               value={quantity}
+                               fullWidth
+                               onChange={e => setQuantity(e.target.value)}/>
                     <input
                         name='image'
                         id="image"

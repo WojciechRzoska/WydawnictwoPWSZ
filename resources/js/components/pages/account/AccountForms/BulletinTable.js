@@ -82,7 +82,7 @@ function BulletinTable() {
                     to='/magazine-panel'
                     variant='contained'
                     color='primary'>
-                Magazyny
+                Czasopisma naukowe
             </Button>
                 </div>
             </div>

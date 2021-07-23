@@ -23,36 +23,14 @@ import BulletinTable from "./components/pages/account/AccountForms/BulletinTable
 import AddBulletin from "./components/pages/bulletins/BulletinForms/AddBulletin";
 import BookTable from "./components/pages/account/AccountForms/BookTable";
 import AddBook from "./components/pages/books/BookForms/AddBook";
-import api from "./api";
-
-
-
+import ShoppingCart from "./components/pages/books/ShoppingCart";
 
 
 function Header(){
-    const [user, setUser] = useState('');
-
-    useEffect(()=> {
-            async function getUser() {
-                api.getDataUser()
-                    .then((res) => {
-                        settingUser(res.data)
-                    })
-                    .catch(e => {
-                        console.error('fail', e);
-                    });
-            }
-            getUser()
-        },[])
-
-    const settingUser = (user) =>{
-        setUser(user);
-    }
-
     return(
         <>
             <Router>
-                <Navbar user={user} settingUser={settingUser}/>
+                <Navbar/>
                 <ScrollToTop/>
                 <Switch>
                     <Route path='/' exact component={Home}/>
@@ -65,8 +43,8 @@ function Header(){
                     <Route path='/magazines' exact component={Magazines}/>
                     <Route path='/magazine-info/:id' component={MagazineInfo}/>
                     <Route path='/edit-magazine/:id' component={EditMagazine}/>
-                    <Route path='/login' exact component={()=> <Login user={user} settingUser={settingUser}/>}/>
-                    <Route path='/admin-panel' exact component={()=> <AdminPanel user={user} />}/>
+                    <Route path='/login' exact component={Login}/>
+                    <Route path='/admin-panel' exact component={AdminPanel}/>
                     <Route path='/forget' exact component={Forget}/>
                     <Route path='/reset/:id' exact component={Reset}/>
                     <Route path='/add-user' exact component={AddUser}/>
@@ -76,6 +54,7 @@ function Header(){
                     <Route path='/bulletin-panel' exact component={BulletinTable}/>
                     <Route path='/book-panel' exact component={BookTable}/>
                     <Route path='/add-book' exact component={AddBook}/>
+                    <Route path='/koszyk' exact component={ShoppingCart}/>
 
 
                 </Switch>

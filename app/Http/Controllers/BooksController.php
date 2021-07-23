@@ -46,11 +46,11 @@ class BooksController extends Controller
         $book->title = $request->input('title');
         $book->description = $request->input('description');
         $book->pages = $request->input('pages');
-//        $book->pdf_path = $request->input('pdf_path');
         $book->year = $request->input('year');
         $book->ISBN = $request->input('ISBN');
         $book->publisher = $request->input('publisher');
         $book->price = $request->input('price');
+        $book->quantity = $request->input('quantity');
 
 
         if($request->hasFile('image')){
@@ -119,6 +119,7 @@ class BooksController extends Controller
         $book->ISBN = $request->input('ISBN');
         $book->publisher = $request->input('publisher');
         $book->price = $request->input('price');
+        $book->quantity = $request->input('quantity');
 
         if($request->hasFile('image')){
             $file = $request->file('image');

@@ -3,6 +3,7 @@ import {TableContainer, Table, TableHead, TableBody, TableRow, TableCell, Paper,
 import {Link, Redirect} from 'react-router-dom';
 import api from "../../../../api";
 import './Panels.css';
+import Navbar from "../../../Navbar";
 
 function BookTable() {
     const [books, setBooks] = useState([]);
@@ -37,12 +38,12 @@ function BookTable() {
                         {row.id}
                     </TableCell>
                     <TableCell align="right">{row.title}</TableCell>
-                    <TableCell align="right">{row.description}</TableCell>
                     <TableCell align="right">{row.pages}</TableCell>
                     <TableCell align="right">{row.year}</TableCell>
                     <TableCell align="right">{row.ISBN}</TableCell>
                     <TableCell align="right">{row.publisher}</TableCell>
                     <TableCell align="right">{row.price}</TableCell>
+                    <TableCell align="right">{row.quantity}</TableCell>
                     <TableCell align="right">
                         <a className='pdf' href={`/${row.pdf_path}`}>[PDF]</a>
                     </TableCell>
@@ -79,7 +80,7 @@ function BookTable() {
                             to='/magazine-panel'
                             variant='contained'
                             color='primary'>
-                        Magazyny
+                        Czasopisma naukowe
                     </Button>
                 </div>
             </div>
@@ -97,12 +98,12 @@ function BookTable() {
                         <TableRow>
                             <TableCell>ID</TableCell>
                             <TableCell align="right">Tytuł</TableCell>
-                            <TableCell align="right">Opis</TableCell>
                             <TableCell align="right">Liczba stron</TableCell>
                             <TableCell align="right">Rok wydania</TableCell>
                             <TableCell align="right">ISBN</TableCell>
                             <TableCell align="right">Autor</TableCell>
                             <TableCell align="right">Cena</TableCell>
+                            <TableCell align="right">Ilość</TableCell>
                             <TableCell align="right">Plik</TableCell>
                             <TableCell align="right">Zdjęcie</TableCell>
                             <TableCell align="right">Akcja</TableCell>

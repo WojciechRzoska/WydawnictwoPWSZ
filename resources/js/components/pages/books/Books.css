@@ -6,8 +6,27 @@
     margin: 0 auto;
     padding: 4rem 4rem 12rem 4rem;
     min-height: 500px;
-
-
 }
 
-
+.booksHeader{
+    display: table;
+    padding-bottom: 2rem;
+    max-width: 1120px;
+    width: 90%;
+}
+.search{
+    width: 300px;
+    display:table-cell;
+    vertical-align:middle;
+}
+.cart{
+    vertical-align:middle;
+    display:table-cell;
+}
+.cartItem{
+    float:right;
+}
+.gridItem{
+    width: 200px;
+    height: 300px;
+}

@@ -77,7 +77,7 @@ export default function AddBulletin() {
                     />
                     <label htmlFor="pdf">
                         <Button variant="contained" color="primary" component="span">
-                            Dodaj pliki
+                            Dodaj plik
                         </Button>
                         <p>{pdf_path.name}</p>
                     </label>

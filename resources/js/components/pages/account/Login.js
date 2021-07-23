@@ -5,7 +5,7 @@ import './Login.css';
 import api from '../../../api';
 import Alert from "@material-ui/lab/Alert";
 
-function Login(props) {
+function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
@@ -22,7 +22,6 @@ function Login(props) {
                 localStorage.setItem('token', res.data.token);
                 localStorage.setItem('role', res.data.user.role)
                 setLoggedIn(true);
-                props.settingUser(res.data.user);
                 document.getElementById('loginForm').reset();
             })
             .catch(e => {
@@ -40,11 +39,15 @@ function Login(props) {
     }
 
     if (loggedIn) {
-        return <Redirect to={'/book-panel'}/>
+        return(<>
+            <Redirect push to={'/book-panel'}/>{window.location.reload()}
+            </>
+        )
+
     }
 
     if (localStorage.getItem('token')) {
-        return <Redirect to={'/'}/>
+        return <Redirect to={'/book-panel'}/>
     }
     return (
         <div className='container'>
