@@ -7,20 +7,21 @@ function Magazine(props){
     const image = `/${props.data.image_path}`;
 
     return(
-        <div className='Box'>
-            <Link
-                to={`/magazine-info/${props.data.id}`}
-            >
-                <div className='Box-img'>
-                    <img className='image' src={image} alt={props.data.title}/>
-                </div>
-                <div className='Details'>
-                    <div className='Title'>
-                        {props.data.title}
+        <div className='magazineData'>
+            <div className='cardImage'>
+                <Link
+                    to={`/magazine-info/${props.data.id}`}
+                >
+                    <div className='item-img'>
+                        <img className='imag' src={image} alt={props.data.title}/>
                     </div>
-                </div>
-            </Link>
-
+                    <div className='magazineBody'>
+                        <div className='Title'>
+                            {props.data.title}
+                        </div>
+                    </div>
+                </Link>
+            </div>
         </div>
     );
 }

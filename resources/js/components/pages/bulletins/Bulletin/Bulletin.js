@@ -6,18 +6,22 @@ function Bulletin(props){
     const image = `/${props.data.image_path}`;
 
     return(
-      <div className='Box'>
-          <Link to={`/bulletin-info/${props.data.id}`}>
-              <div className='Box-img'>
-                  <img className='image' src={image} alt={props.data.title}/>
-              </div>
-              <div className='Details'>
-                  <div className='Title'>
-                      {props.data.title}
-                  </div>
-              </div>
-          </Link>
-      </div>
+    <div className='bulletinData'>
+        <div className='cardImage'>
+            <Link
+                to={`/bulletin-info/${props.data.id}`}
+            >
+                <div className='item-img'>
+                    <img className='imag' src={image} alt={props.data.title}/>
+                </div>
+                <div className='bulletinBody'>
+                    <div className='Title'>
+                        {props.data.title}
+                    </div>
+                </div>
+            </Link>
+        </div>
+    </div>
     );
 }
 export default Bulletin;

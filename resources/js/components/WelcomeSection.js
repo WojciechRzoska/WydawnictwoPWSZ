@@ -7,8 +7,8 @@ import {HashLink as Link} from 'react-router-hash-link';
 function WelcomeSection(){
     return(
         <div className='Page-section'>
-            <h1>Wydawnictwo PWSZ</h1>
-            <p>Biuletyny ksiązki</p>
+            <h1>Wydawnictwo PWSZ w Elblągu</h1>
+            <p>Publikacje, biuletyny, czasopisma</p>
             <div className='Buttons'>
                 <Link to='#CardsSection'>
                     <button className='btn btn--primary btn--large'>Zobacz co oferujemy</button>

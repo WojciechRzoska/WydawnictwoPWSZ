@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import {NavLink, Redirect, useHistory} from 'react-router-dom';
 import './Navbar.css';
 import Logo from '../../images/WhiteLogo.png';
-import api from "../api";
-import {Link} from '@material-ui/core';
 
 
-function Navbar(props) {
+
+function Navbar() {
+
     const [click, setClick] = useState(false);
 
     const handleClick = () => setClick(!click);
@@ -19,11 +19,12 @@ function Navbar(props) {
     const logout = () => {
         history.push('/');
         localStorage.clear();
-        props.settingUser(null);
         history.go(0)
     }
 
-    const Login = () => {
+
+
+    let Login = () => {
         if (localStorage.getItem('token')) {
             if (localStorage.getItem('role') === 'admin') {
                 return (
@@ -95,11 +96,10 @@ function Navbar(props) {
                                      to='/magazines'
                                      className='Nav-links'
                                      onClick={closeMobileMenu}>
-                                Czasopisma
+                                Czasopisma naukowe
                             </NavLink>
                         </li>
                         {Login()}
-
 
                     </ul>
 

@@ -73,7 +73,12 @@ function Magazines() {
     return (
         <>
             <div className='Container'>
-                <TextField placeholder='Szukaj czasopism' onChange={(e) => search(e.target.value)}/>
+                <h1>Rozprawy Naukowe i Zawodowe PWSZ w Elblągu</h1>
+                <div className='itemsHeader'>
+                    <div className='searchHeader'>
+                    <TextField fullWidth placeholder='Szukaj czasopism' onChange={(e) => search(e.target.value)}/>
+                    </div>
+                </div>
                 <Grid container justify="center">
                     {renderMagazines()}
                 </Grid>

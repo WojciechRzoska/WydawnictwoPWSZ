@@ -14,18 +14,18 @@ function CardsSection(){
                     <ul className='Cards-items'>
                         <Card
                             src={Books}
-                            text='Nasze wydane książki'
+                            text='Nasze publikacje'
                             path='/books'
                         />
                         <Card
                             src={Magazines}
-                            text='Wszystkie dostępne czasopisma'
+                            text='Czasopisma naukowe Państwowej Wyższej Szkoły Zawodowej w Elblągu'
                             path='/bulletins'
                         />
                         <Card
                             src={Bulletin}
-                            text='Wszystkie biuletyny'
-                            path='/services'
+                            text='Biuletyny PWSZ'
+                            path='/bulletins'
                         />
                     </ul>
 

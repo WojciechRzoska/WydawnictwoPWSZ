@@ -1,0 +1,11 @@
+.itemsHeader{
+    display: table;
+    padding-bottom: 2rem;
+    max-width: 1120px;
+    width: 90%;
+}
+.searchHeader{
+    width: 300px;
+    vertical-align:middle;
+
+}
