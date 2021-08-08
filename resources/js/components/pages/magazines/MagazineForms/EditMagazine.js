@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {withRouter, Redirect, useHistory} from 'react-router-dom';
-import {Button, TextField} from "@material-ui/core";
+import {Button, TextField, Typography} from "@material-ui/core";
 import api from '../../../../api';
 import './EditMagazine.css';
 
@@ -13,6 +13,10 @@ function EditMagazine(props) {
     const [image_path, setImagePath] = useState('');
     const [edit_image, setEditImage] = useState('');
     const [edit_pdf, setEditPDF] = useState('');
+
+    const [errorTitle, setErrorTitle] = useState('');
+    const [errorISSN, setErrorISSN] = useState('');
+    const [errorRelease, setErrorRelease] = useState('');
 
     let history = useHistory();
 
@@ -64,10 +68,14 @@ function EditMagazine(props) {
         api.updateMagazine(item.id, fData)
             .then(res => {
                 console.log('response', res);
+                history.goBack();
             }).catch(e => {
-            console.error('fail', e);
+            console.error('fail', e.response.data.errors);
+            setErrorTitle(e.response.data.errors.title);
+            setErrorISSN(e.response.data.errors.ISSN);
+            setErrorRelease(e.response.data.errors.release);
         });
-        history.goBack();
+
 
     }
 
@@ -93,19 +101,21 @@ function EditMagazine(props) {
                                fullWidth
                                multiline
                                onChange={e => setTitle(e.target.value)}/>
+                    <Typography className='formError' color='error'>{errorTitle}</Typography>
                     <TextField id="standard-required"
                                label="ISSN"
                                value={ISSN}
                                fullWidth
                                multiline
                                onChange={e => setISSN(e.target.value)}/>
+                    <Typography className='formError' color='error'>{errorISSN}</Typography>
                     <TextField id="standard-required"
                                label="Data wydania"
                                value={release}
                                fullWidth
                                multiline
-                               onChange={e => set(e.target.value)}/>
-
+                               onChange={e => setRelease(e.target.value)}/>
+                    <Typography className='formError' color='error'>{errorRelease}</Typography>
                     {files()}
                     <input name='image' id='image' type='file' hidden onChange={handleIMG}/>
                     <label htmlFor="image">

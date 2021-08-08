@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {TextField, Button} from "@material-ui/core";
+import {TextField, Button, Typography} from "@material-ui/core";
 import {useHistory, Redirect} from "react-router-dom";
 import api from '../../../../api';
 import '../../account/AccountForms/AddForms.css';
@@ -10,6 +10,14 @@ export default function AddMagazine() {
     const [release, setRelease] = useState('');
     const [image_path, setImagePath] = useState('');
     const [pdf_path, setPdfPath] = useState([]);
+
+    const [errorTitle, setErrorTitle] = useState('');
+    const [errorISSN, setErrorISSN] = useState('');
+    const [errorRelease, setErrorRelease] = useState('');
+    const [errorImage, setErrorImage] = useState('');
+    const [errorPdf, setErrorPdf] = useState('');
+
+
 
     let history = useHistory();
 
@@ -36,10 +44,16 @@ export default function AddMagazine() {
         api.addMagazine(fData)
             .then(res => {
                 console.log('response', res);
+                history.goBack();
             }).catch(e => {
-            console.error('fail', e);
+            console.error('fail', e.response.data.errors);
+            setErrorTitle(e.response.data.errors.title);
+            setErrorISSN(e.response.data.errors.ISSN);
+            setErrorRelease(e.response.data.errors.release);
+            setErrorImage(e.response.data.errors.image);
+            setErrorPdf(e.response.data.errors.pdfs);
         });
-        history.goBack();
+
     }
 
     return (
@@ -54,16 +68,19 @@ export default function AddMagazine() {
                                value={title}
                                fullWidth
                                onChange={e => setTitle(e.target.value)}/>
+                    <Typography className='formError' color='error'>{errorTitle}</Typography>
                     <TextField required id="standard-required"
                                label="ISSN"
                                value={ISSN}
                                fullWidth
                                onChange={e => setISSN(e.target.value)}/>
+                    <Typography className='formError' color='error'>{errorISSN}</Typography>
                     <TextField required id="standard-required"
                                label="Data wydania"
                                value={release}
                                fullWidth
                                onChange={e => setRelease(e.target.value)}/>
+                    <Typography className='formError' color='error'>{errorRelease}</Typography>
                     <input
                         name='image'
                         id="image"
@@ -77,6 +94,7 @@ export default function AddMagazine() {
                             Dodaj zdjęcie
                         </Button>
                         <p>{image_path.name}</p>
+                        <Typography className='formError' color='error'>{errorImage}</Typography>
                     </label>
 
                     <input
@@ -93,6 +111,7 @@ export default function AddMagazine() {
                             Dodaj pliki
                         </Button>
                         <p>{pdf_path.name}</p>
+                        <Typography className='formError' color='error'>{errorPdf}</Typography>
                     </label>
                     <Button variant="contained" onClick={submitData}>
                         Dodaj

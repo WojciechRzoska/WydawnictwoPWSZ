@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddMagazineRequest;
+use App\Http\Requests\EditMagazineRequest;
 use App\Models\MagazineFile;
 use Illuminate\Http\Request;
 use App\Http\Resources\Magazine as MagazineResource;
@@ -36,7 +38,7 @@ class MagazinesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddMagazineRequest $request)
     {
         $magazine = new Magazine();
         $magazine->title = $request->input('title');
@@ -100,7 +102,7 @@ class MagazinesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditMagazineRequest $request, $id)
     {
         $magazine = Magazine::find($id);
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {withRouter, useHistory, Redirect} from 'react-router-dom';
-import {Button, TextField} from "@material-ui/core";
+import {Button, TextField, Typography} from "@material-ui/core";
 import api from '../../../../api';
 import './EditBulletin.css';
 
@@ -11,6 +11,8 @@ function EditBulletin(props) {
     const [image_path, setImagePath] = useState('');
     const [pdf_path, setPdfPath] = useState('');
     const [edit_image, setEditImage] = useState('');
+
+    const [titleError, setTitleError] = useState('');
 
     let history = useHistory();
 
@@ -51,10 +53,12 @@ function EditBulletin(props) {
         api.updateBulletin(object.id, fData)
             .then(res => {
                 console.log('response', res);
+                history.goBack();
             }).catch(e => {
             console.error('fail', e);
+            setTitleError(e.response.data.errors.title);
         });
-        history.goBack();
+
 
     }
 
@@ -68,6 +72,7 @@ function EditBulletin(props) {
                                fullWidth
                                multiline
                                onChange={e => setTitle(e.target.value)}/>
+                    <Typography className='formError' color='error'>{titleError}</Typography>
                     <input name='image' id='image' type='file' hidden onChange={handleIMG}/>
                     <label htmlFor="image">
                         <Button variant="contained" color="primary" component="span">

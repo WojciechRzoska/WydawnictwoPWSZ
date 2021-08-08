@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddBookRequest;
+use App\Http\Requests\EditBookRequest;
 use App\Models\Book;
 use App\Http\Resources\Book as BookResource;
 use Illuminate\Http\Request;
@@ -28,19 +30,8 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddBookRequest $request)
     {
-//        $request->validate([
-//        'title' => 'required',
-//        'description' => 'required',
-//        'cover' => 'required',
-//        'pages' => 'required',
-//        'contests' => 'required',
-//        'year' => 'required',
-//        'ISBN' => 'required',
-//        'publisher' => 'required',
-//        'price' => 'required'
-//        ]);
 
         $book = new Book();
         $book->title = $request->input('title');
@@ -107,7 +98,7 @@ class BooksController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditBookRequest $request, $id)
     {
         $book = Book::find($id);
 

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {TextField, Button} from "@material-ui/core";
+import {TextField, Button, Typography} from "@material-ui/core";
 import {useHistory, Redirect} from "react-router-dom";
 import api from '../../../../api';
 import '../../account/AccountForms/AddForms.css';
@@ -8,6 +8,11 @@ export default function AddBulletin() {
     const [title, setTitle] = useState('');
     const [image_path, setImagePath] = useState('');
     const [pdf_path, setPdfPath] = useState('');
+
+    const [titleError, setTitleError] = useState('');
+    const [imageError, setImageError] = useState('');
+    const [pdfError, setPdfError] = useState('');
+
 
     let history = useHistory();
 
@@ -34,10 +39,13 @@ export default function AddBulletin() {
         api.addBulletin(fData)
             .then(res => {
                 console.log('response', res);
+                history.goBack();
             }).catch(e => {
-            console.error('fail', e);
+            console.error('fail', e.response.data.errors);
+            setTitleError(e.response.data.errors.title);
+            setImageError(e.response.data.errors.image);
+            setPdfError(e.response.data.errors.pdf);
         });
-        history.goBack();
     }
 
     return (
@@ -52,6 +60,7 @@ export default function AddBulletin() {
                                value={title}
                                fullWidth
                                onChange={e => setTitle(e.target.value)}/>
+                    <Typography className='formError' color='error'>{titleError}</Typography>
                     <input
                         name='image'
                         id="image"
@@ -60,11 +69,13 @@ export default function AddBulletin() {
                         type="file"
                         hidden
                     />
+
                     <label htmlFor="image">
                         <Button variant="contained" color="primary" component="span">
                             Dodaj zdjęcie
                         </Button>
                         <p>{image_path.name}</p>
+                        <Typography className='formError' color='error'>{imageError}</Typography>
                     </label>
 
                     <input
@@ -80,6 +91,7 @@ export default function AddBulletin() {
                             Dodaj plik
                         </Button>
                         <p>{pdf_path.name}</p>
+                        <Typography className='formError' color='error'>{pdfError}</Typography>
                     </label>
                     <Button variant="contained" onClick={submitData}>
                         Dodaj

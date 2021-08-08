@@ -14,6 +14,10 @@ function PageEdit() {
     const [title, setTitle] = useState(TextData[`${index}`]["title"]);
     const [newIndex, setNewIndex] =useState('');
 
+    if (!localStorage.getItem('token')) {
+        return <Redirect to={'/login'}/>
+    }
+
     useEffect(() =>{
         if(index !=  newIndex){
             const anotherText = TextData[`${newIndex}`]["text"];

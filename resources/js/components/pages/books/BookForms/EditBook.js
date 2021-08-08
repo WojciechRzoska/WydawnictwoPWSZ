@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, TextField} from "@material-ui/core";
+import {Button, TextField, Typography} from "@material-ui/core";
 import {withRouter, Redirect, useHistory} from 'react-router-dom';
 import './EditBook.css';
 import api from "../../../../api";
@@ -19,6 +19,15 @@ function EditBook(props) {
     const [price, setPrice] = useState('');
     const [edit_image, setEditImage] = useState('');
     const [quantity, setQuantity] = useState('');
+
+    const [errorTitle, setErrorTitle] = useState('');
+    const [errorPages, setErrorPages] = useState('');
+    const [errorISBN, setErrorISBN] = useState('');
+    const [errorYear, setErrorYear] = useState('');
+    const [errorPublisher, setErrorPublisher] = useState('');
+    const [errorPrice, setErrorPrice] = useState('');
+    const [errorQuantity, setErrorQuantity] = useState('');
+
 
     let history = useHistory();
 
@@ -74,10 +83,18 @@ function EditBook(props) {
         api.updateBook(object.id, fData)
             .then(res => {
                 console.log('response', res);
+                history.goBack();
             }).catch(e => {
-            console.error('fail', e);
+            console.error('fail', e.response.data.errors);
+            setErrorTitle(e.response.data.errors.title);
+            setErrorPages(e.response.data.errors.pages);
+            setErrorYear(e.response.data.errors.year);
+            setErrorISBN(e.response.data.errors.ISBN);
+            setErrorPublisher(e.response.data.errors.publisher);
+            setErrorPrice(e.response.data.errors.price);
+            setErrorQuantity(e.response.data.errors.quantity);
         });
-        history.goBack();
+
     }
 
     return (
@@ -90,7 +107,7 @@ function EditBook(props) {
                                fullWidth
                                multiline
                                onChange={e => setTitle(e.target.value)}/>
-
+                    <Typography className='formError' color='error'>{errorTitle}</Typography>
                     <TextField
                         id="standard-required"
                         label="Opis"
@@ -108,7 +125,7 @@ function EditBook(props) {
                         fullWidth
                         onChange={e => setPages(e.target.value)}
                     />
-
+                    <Typography className='formError' color='error'>{errorPages}</Typography>
 
                     <TextField
                         id="standard-required"
@@ -117,7 +134,7 @@ function EditBook(props) {
                         fullWidth
                         onChange={e => setYear(e.target.value)}
                     />
-
+                    <Typography className='formError' color='error'>{errorYear}</Typography>
                     <TextField
                         id="standard-required"
                         label="ISBN"
@@ -125,7 +142,7 @@ function EditBook(props) {
                         fullWidth
                         onChange={e => setISBN(e.target.value)}
                     />
-
+                    <Typography className='formError' color='error'>{errorISBN}</Typography>
                     <TextField
                         id="standard-required"
                         label="wydawca"
@@ -134,7 +151,7 @@ function EditBook(props) {
                         multiline
                         onChange={e => setPublisher(e.target.value)}
                     />
-
+                    <Typography className='formError' color='error'>{errorPublisher}</Typography>
                     <TextField
                         id="standard-required"
                         label="Cena"
@@ -142,6 +159,7 @@ function EditBook(props) {
                         fullWidth
                         onChange={e => setPrice(e.target.value)}
                     />
+                    <Typography className='formError' color='error'>{errorPrice}</Typography>
                     <TextField
                         id="standard-required"
                         label="Ilość dostępnych egzemplarzy"
@@ -149,6 +167,7 @@ function EditBook(props) {
                         fullWidth
                         onChange={e => setQuantity(e.target.value)}
                     />
+                    <Typography className='formError' color='error'>{errorQuantity}</Typography>
 
                     <input name='pdf' id='pdf' type='file' hidden onChange={handlePDF}/>
                     <label htmlFor="pdf">
