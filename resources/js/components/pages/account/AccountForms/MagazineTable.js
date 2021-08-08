@@ -82,6 +82,14 @@ function MagazineTable() {
                         Biuletyny
                     </Button>
                 </div>
+                <div className='menuButton'>
+                    <Button component={Link}
+                            to='/edycja-informacji'
+                            variant='contained'
+                            color='primary'>
+                        Edycja stron
+                    </Button>
+                </div>
             </div>
             <div className='options'>
                 <Button component={Link}

@@ -10,71 +10,69 @@ function Footer() {
             <div className='Footer'>
                 <div className='Footer-heading'>
                     <img src={Logo} alt='logo' className='Logo'/>
-                    <p>Państwowa Wyższa Szkoła Zawodowa w Elblągu</p>
+                    <p>Wydawnictwo Państwowej Wyższej Szkoły Zawodowowej w Elblągu</p>
                     <div className='Footer-info-data'>
                         <div className='Info-data-row'>
                             <i className="fa fa-home"/>
-                            ul. Wojska Polskiego 1, 82-300 Elbląg
+                            ul. Wojska Polskiego 1, 82-300 Elbląg,
                         </div>
                         <div className='Info-data-row'>
                             <i className="fa fa-phone"/>
-                            +48 55 629 05 05
-                        </div>
-                        <div className='Info-data-row'>
-                            <i className="fa fa-fax"/>
-                            +48 55 629 05 10
+                            +48 55 629 05 55
                         </div>
                         <div className='Info-data-row'>
                             <i className="fa fa-envelope"/>
-                            <a href="mailto:pwsz@pwsz.elblag.pl">pwsz@pwsz.elblag.pl</a>
-                        </div>
-                        <div className='Info-data-row'>
-                            <a href="https://pwsz.elblag.pl/kontakt.html">więcej informacji</a>
+                            <a href="mailto:j.kuna@pwsz.elblag.pl">pwsz@pwsz.elblag.pl</a>
                         </div>
                     </div>
                 </div>
                 <div className='Footer-heading'>
-                    <h2>Na skróty</h2>
-                    <Link to='/sign-up'>link1</Link>
-                    <Link to='/'>link2</Link>
-                    <Link to='/'>link3</Link>
-                    <Link to='/'>link4</Link>
-                    <Link to='/'>link5</Link>
+                    <h2>Informacje</h2>
+                    <Link to='/regulamin'>Regulamin</Link>
+                    <Link to='/polityka-prywatności'>Polityka prywatności</Link>
                     <div className='Social'>
                         <h2>Media społecznościowe</h2>
                         <div className='Socials-icons'>
-                            <Link
+                            <a
                                 className='Social-icon-link'
-                                to='/'
+                                href='https://www.facebook.com/pwszelblag'
                                 target='_blank'
                                 aria-label='Facebook'
                             >
                                 <i className='fab fa-facebook-f'/>
-                            </Link>
-                            <Link
+                            </a>
+                            <a
                                 className='Social-icon-link'
-                                to='/'
+                                href='https://www.instagram.com/pwsz.elblag/'
                                 target='_blank'
                                 aria-label='Instagram'
                             >
                                 <i className='fab fa-instagram'/>
-                            </Link>
-                            <Link
+                            </a>
+                            <a
                                 className='Social-icon-link'
-                                to='/'
+                                href='https://www.youtube.com/user/pwszelblag'
                                 target='_blank'
                                 aria-label='Youtube'
                             >
                                 <i className='fab fa-youtube'/>
-                            </Link>
-                            <Link
+                            </a>
+                            <a
                                 className='Social-icon-link twitter'
-                                to='/'
+                                href='https://twitter.com/pwszelblag'
                                 target='_blank'
                                 aria-label='Twitter'
                             >
                                 <i className='fab fa-twitter'/>
-                            </Link>
+                            </a>
+                            <a
+                                className='Social-icon-link snapchat'
+                                href='https://story.snapchat.com/@pwszelblag'
+                                target='_blank'
+                                aria-label='Snapchat'
+                            >
+                                <i className='fab fa-snapchat'/>
+                            </a>
                         </div>
                     </div>
                 </div>

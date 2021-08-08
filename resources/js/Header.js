@@ -24,7 +24,9 @@ import AddBulletin from "./components/pages/bulletins/BulletinForms/AddBulletin"
 import BookTable from "./components/pages/account/AccountForms/BookTable";
 import AddBook from "./components/pages/books/BookForms/AddBook";
 import ShoppingCart from "./components/pages/books/ShoppingCart";
-
+import Rules from "./components/pages/FooterPages/Rules";
+import PageEdit from "./components/pages/account/AccountForms/PageEdit";
+import PrivacyPolicy from "./components/pages/FooterPages/PrivacyPolicy";
 
 function Header(){
     return(
@@ -55,7 +57,9 @@ function Header(){
                     <Route path='/book-panel' exact component={BookTable}/>
                     <Route path='/add-book' exact component={AddBook}/>
                     <Route path='/koszyk' exact component={ShoppingCart}/>
-
+                    <Route path='/regulamin' exact component={Rules}/>
+                    <Route path='/polityka-prywatności' exact component={PrivacyPolicy}/>
+                    <Route path='/edycja-informacji' exact component={PageEdit}/>
 
                 </Switch>
 

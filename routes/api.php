@@ -36,6 +36,7 @@ Route::get('magazine/search/{key}', [\App\Http\Controllers\MagazinesController::
 Route::resource('magazine-files', 'App\Http\Controllers\MagazineFilesController');
 Route::get('magazines', [\App\Http\Controllers\MagazinesController::class, 'getAll']);
 
+Route::post('/edit-text', [\App\Http\Controllers\EditWebsiteData::class, 'editRules']);
 
 
 

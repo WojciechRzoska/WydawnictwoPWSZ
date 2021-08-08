@@ -72,4 +72,7 @@ export default{
     addUser:(User) =>
         axios.post(`${BASE_API_URL}/handle-user`,User),
 
+    //page edit api
+    editText:(Text) =>
+        axios.post(`${BASE_API_URL}/edit-text`,Text)
 }

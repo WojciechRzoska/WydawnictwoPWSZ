@@ -1,7 +1,7 @@
 .content {
     flex-flow: column;
     align-items: center;
-    max-width: 800px;
+    max-width: 600px;
     width: 90%;
     margin: 0 auto;
     padding: 4rem 4rem 12rem 4rem;
@@ -15,4 +15,20 @@
 
 .submitButton {
     padding-top: 10px;
+}
+.inputs{
+    width: 100%;
+}
+.form{
+    width: 100%;
+}
+.contentPageEdit {
+    flex-flow: column;
+    align-items: center;
+    max-width: 1120px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 4rem 4rem 12rem 4rem;
+    min-height: 500px;
+
 }

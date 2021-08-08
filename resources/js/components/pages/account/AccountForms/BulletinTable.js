@@ -40,7 +40,7 @@ function BulletinTable() {
                     <TableCell align="right">{row.title}</TableCell>
                     <TableCell align="right">
                         <a className='pdf' key={i} href={`/${row.pdf_path}`}>[PDF]</a>
-                     </TableCell>
+                    </TableCell>
                     <TableCell align="right"><img src={row.image_path}/> </TableCell>
 
                     <TableCell align="right" className='action'>
@@ -55,7 +55,8 @@ function BulletinTable() {
                         </Button>
 
 
-                        <Button variant='contained' color='secondary' onClick={() => deleteOperation(row.id)}>Usuń</Button>
+                        <Button variant='contained' color='secondary'
+                                onClick={() => deleteOperation(row.id)}>Usuń</Button>
 
 
                     </TableCell>
@@ -70,20 +71,28 @@ function BulletinTable() {
         <div className='container'>
             <div className='menu'>
                 <div className='menuButton'>
-            <Button component={Link}
-                    to='/book-panel'
-                    variant='contained'
-                    color='primary'>
-                Książki
-            </Button>
+                    <Button component={Link}
+                            to='/book-panel'
+                            variant='contained'
+                            color='primary'>
+                        Książki
+                    </Button>
                 </div>
                 <div className='menuButton'>
-            <Button component={Link}
-                    to='/magazine-panel'
-                    variant='contained'
-                    color='primary'>
-                Czasopisma naukowe
-            </Button>
+                    <Button component={Link}
+                            to='/magazine-panel'
+                            variant='contained'
+                            color='primary'>
+                        Czasopisma naukowe
+                    </Button>
+                </div>
+                <div className='menuButton'>
+                    <Button component={Link}
+                            to='/edycja-informacji'
+                            variant='contained'
+                            color='primary'>
+                        Edycja stron
+                    </Button>
                 </div>
             </div>
             <div className='options'>
