@@ -85,10 +85,10 @@ function BookTable() {
                 </div>
                 <div className='menuButton'>
                     <Button component={Link}
-                            to='/edycja-informacji'
+                            to='/dodawanie-informacji'
                             variant='contained'
                             color='primary'>
-                        Edycja stron
+                        Strony w stopce
                     </Button>
                 </div>
             </div>

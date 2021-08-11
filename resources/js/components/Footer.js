@@ -1,10 +1,21 @@
-import React from 'react';
+import React ,{useState}from 'react';
 import './Footer.css';
-import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import Logo from '../../images/WhiteLogo.png';
+import textData from './pages/footerPages/footerPages.json';
 
 function Footer() {
+    const handleFooterLinks = () =>{
+
+        return Object.keys(textData).map((link, i) => (
+            <Link  to={{
+                pathname: `/informacje/${textData[link]["title"]}`,
+                state: { id: link}
+            }} key={i}>{textData[link]["title"]}</Link>
+
+        ))
+    }
+
     return(
         <div className='Footer-container'>
             <div className='Footer'>
@@ -28,8 +39,7 @@ function Footer() {
                 </div>
                 <div className='Footer-heading'>
                     <h2>Informacje</h2>
-                    <Link to='/regulamin'>Regulamin</Link>
-                    <Link to='/polityka-prywatności'>Polityka prywatności</Link>
+                    {handleFooterLinks()}
                     <div className='Social'>
                         <h2>Media społecznościowe</h2>
                         <div className='Socials-icons'>

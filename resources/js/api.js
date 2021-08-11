@@ -74,5 +74,11 @@ export default{
 
     //page edit api
     editText:(Text) =>
-        axios.post(`${BASE_API_URL}/edit-text`,Text)
+        axios.post(`${BASE_API_URL}/edit-text`,Text),
+    deleteText:(id) =>
+        axios.post(`${BASE_API_URL}/delete-text`, id),
+    addText:(Text) =>
+        axios.post(`${BASE_API_URL}/add-text`, Text),
+
+
 }
