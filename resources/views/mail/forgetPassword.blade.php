@@ -6,9 +6,9 @@
 <body>
 Cześć <br>
 
-Zmień swoje hasło<a href="http://127.0.0.1:8000/reset/{{ $data }}">Click Here</a>
+Aby zmienić swoje hasło <a href="http://127.0.0.1:8000/reset">wejdź tutaj</a> i przepisz podany kod.
 <br>
-Pincode : {{ $data }}
+Kod: {{ $data }}
 
 
 </body>

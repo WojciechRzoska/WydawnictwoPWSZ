@@ -15,7 +15,7 @@ class ForgetPasswordController extends Controller
 
         if (User::where('email',$email)->doesntExist()) {
             return response([
-                'message' => 'Email Invalid'
+                'message' => 'Błędny email'
             ],401);
         }
 
@@ -32,7 +32,7 @@ class ForgetPasswordController extends Controller
             Mail::to($email)->send(new ForgetPasswordMail($token));
 
             return response([
-                'message' => 'Reset Password Mail send on your email'
+                'message' => 'Kod resetujący został wysłany na email'
             ],200);
 
         }catch(Exception $exception){

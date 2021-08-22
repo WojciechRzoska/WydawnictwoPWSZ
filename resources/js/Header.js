@@ -48,7 +48,7 @@ function Header(){
                     <Route path='/login' exact component={Login}/>
                     <Route path='/admin-panel' exact component={AdminPanel}/>
                     <Route path='/forget' exact component={Forget}/>
-                    <Route path='/reset/:id' exact component={Reset}/>
+                    <Route path='/reset' exact component={Reset}/>
                     <Route path='/add-user' exact component={AddUser}/>
                     <Route path='/magazine-panel' exact component={MagazineTable}/>
                     <Route path='/add-magazine' exact component={AddMagazine}/>

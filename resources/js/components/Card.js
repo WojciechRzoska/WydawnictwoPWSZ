@@ -11,7 +11,7 @@ function Card(props){
                         <img
                             src={props.src}
                             className='Card-img'
-                            alt='Travel Image'
+                            alt='Card Image'
 
                         />
                     </figure>

@@ -19,7 +19,7 @@ class AuthController extends Controller
                 $token = $user->createToken('app')->accessToken;
 
                 return response([
-                    'message' => "Successfully account",
+                    'message' => "Udane logowanie",
                     'token' => $token,
                     'user' => $user
                 ],200);
@@ -31,10 +31,8 @@ class AuthController extends Controller
             ],400);
         }
         return response([
-            'message' => 'Invalid Email Or Password'
+            'message' => 'Nieprawidłowy email lub hasło'
         ],401);
 
     }
-
-
 }

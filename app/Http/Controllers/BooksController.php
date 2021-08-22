@@ -155,10 +155,11 @@ class BooksController extends Controller
         }
     }
 
-    public function search($key){
-        return Book::query()
-            ->where('title','Like', "%$key%")
-            ->orwhere('pages','Like', "%$key%")
-            ->get();
-    }
+        public function search($key){
+            return Book::query()
+                ->where('title','Like', "%$key%")
+                ->orwhere('publisher','Like', "%$key%")
+                ->orwhere('ISBN','Like', "%$key%")
+                ->get();
+        }
 }

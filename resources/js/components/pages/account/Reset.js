@@ -12,7 +12,7 @@ function Reset() {
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [message, setMessage] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
-
+    const [errorPassword, setErrorPassword] = useState('');
 
     const ResetSubmit = e => {
         e.preventDefault();
@@ -25,10 +25,10 @@ function Reset() {
         api.resetPassword(fData)
             .then(res => {
                 setLoggedIn(true);
-                document.getElementById('resetForm').reset();
             })
             .catch(e => {
                 setMessage(e.response.data.message);
+
             })
 
 

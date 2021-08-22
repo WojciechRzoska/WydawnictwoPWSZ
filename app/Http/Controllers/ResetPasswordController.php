@@ -19,12 +19,12 @@ class ResetPasswordController extends Controller
 
         if (!$emailcheck) {
             return response([
-                'message' => "Email Not Found"
+                'message' => "Nieprawidłowy email"
             ],401);
         }
         if (!$pincheck) {
             return response([
-                'message' => "Pin Code Invalid"
+                'message' => "Nieprawidłowy kod"
             ],401);
         }
 
@@ -32,7 +32,7 @@ class ResetPasswordController extends Controller
         DB::table('password_resets')->where('email',$email)->delete();
 
         return response([
-            'message' => 'Password Change Successfully'
+            'message' => 'Udana zmiana hasła'
         ],200);
     }
 }

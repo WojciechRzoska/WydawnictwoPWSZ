@@ -34,6 +34,6 @@ class ForgetPasswordMail extends Mailable
 
         return $this->from('testmailsenderpl@gmail.com')
             ->view('mail.forgetPassword', compact('data'))
-            ->subject('Password Reset Link');
+            ->subject('Reset hasła do konta Wydawnictwa PWSZ');
     }
 }

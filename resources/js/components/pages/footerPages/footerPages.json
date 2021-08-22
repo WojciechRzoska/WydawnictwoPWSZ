@@ -1,14 +1,10 @@
 {
     "1": {
-        "title": "abc",
+        "title": "Regulamin sklepu",
         "text": "<p>abc</p>"
     },
     "2": {
-        "title": "abcz",
+        "title": "Polityka prywatności",
         "text": "<h4>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PRZEPISY WSTĘPNE</h4><h4>&nbsp;</h4><h4>§ 1.1. Regulamin określa porządek wewnętrzny w................................. (nazwa zakładu), a także prawa i obowiązki pracowników i pracodawcy.&nbsp;</h4><h4>2. Regulamin pracy obowiązuje wszystkich pracowników, bez względu na zajmowane stanowisko i wymiar czasu pracy.</h4><p>§ 2. Ilekroć w regulaminie jest mowa o:&nbsp;</p><p>1) przepisach prawa pracy – oznacza to kodeks pracy oraz przepisy wydane na jego podstawie,&nbsp;</p><p>2) pracodawcy – oznacza to.................................................................................................. (dyrektora – w przedsiębiorstwach państwowych, zarząd – w spółce, właściciela – w firmie jednoosobowej działającej na podstawie wpisu do ewidencji, inny organ – zależnie od statusu zakładu)</p><p>&nbsp;3) pracowniku – oznacza to osobę zatrudnioną na podstawie umowy o pracę.</p>"
-    },
-    "3": {
-        "title": "abz",
-        "text": "<p>§ 2. Ilekroć w regulaminie jest mowa o: 1) przepisach prawa pracy – oznacza to kodeks pracy oraz przepisy wydane na jego podstawie, 2) pracodawcy – oznacza to.................................................................................................. (dyrektora – w przedsiębiorstwach państwowych, zarząd – w spółce, właściciela – w firmie jednoosobowej działającej na podstawie wpisu do ewidencji, inny organ – zależnie od statusu zakładu) 3) pracowniku – oznacza to osobę zatrudnioną na podstawie umowy o pracę.</p>"
     }
 }
