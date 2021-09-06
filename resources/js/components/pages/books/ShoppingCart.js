@@ -2,12 +2,15 @@ import React, {useEffect, useState} from "react";
 import {TableContainer, TableHead, TableRow, TableBody, Table, TableCell, TextField, Button} from "@material-ui/core";
 import Checkbox from '@material-ui/core/Checkbox';
 import './ShoppingCart.css';
-
+import {Redirect} from 'react-router-dom';
+import api from "../../../api";
 
 function ShoppingCart() {
     const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
     const [cart, setCart] = useState(cartFromLocalStorage);
-
+    const [description, setDescription] = useState([]);
+    const [email, setEmail] = useState('');
+    const [amount, setAmount] = useState('');
 
     const removeFromCart = (deleteItem) => {
         cart.splice(deleteItem, 1);
@@ -15,9 +18,37 @@ function ShoppingCart() {
         window.location.reload();
     }
 
-    const totalPrice = () => {
-        return cart.reduce((sum, {price}) => sum + price, 0);
+    useEffect(() => {
+        descriptionHandle()
+        totalPrice()
+    }, [cart])
+    const submitData = e => {
+        e.preventDefault();
+        const fData = new FormData();
+        fData.append('description', description.join());
+        fData.append('email', email);
+        fData.append('amount', amount);
+
+
+
+        api.registerToken(fData)
+            .then(res=>{
+                console.log('response', res)
+                window.location.replace(`https://sandbox.przelewy24.pl/trnRequest/${res.data.data.token}`);
+            }).catch(e =>{
+                console.error('error',e)
+        })
     }
+
+    const directHandle = () =>{
+       return <Redirect push to="wp.pl" />
+    }
+    const totalPrice = () => {
+        const reduce = cart.reduce((sum, {price}) => sum + price, 0);
+
+        return setAmount(reduce * 100);
+    }
+
     const renderCart = () => {
         if (cart.length === 0) {
             return <p>Koszyk jest pusty</p>
@@ -35,6 +66,11 @@ function ShoppingCart() {
                 </TableRow>
             ))
         }
+    }
+    const descriptionHandle = () =>{
+        const newArray = cart.map(book => (book.title));
+        setDescription([...description, newArray]);
+
     }
     return (
         <>
@@ -56,68 +92,72 @@ function ShoppingCart() {
                 </TableContainer>
                 <div className='cartInfo'>
                 <div className='sendForm'>
-                    <form className='root' noValidate autoComplete="off"   action="https://sklep.przelewy24.pl/zakup.php?">
-                        {/*<TextField  id="standard-required"*/}
-                        {/*            name="z24_id_sprzedawcy"*/}
-                        {/*            value="151177" fullWidth*/}
 
-                        {/*/>*/}
-                        {/*<TextField  id="standard-required"*/}
-                        {/*            name="z24_crc"*/}
-                        {/*            value="2c6da7466f6140f9" fullWidth*/}
+                    {/*<form className='root' noValidate autoComplete="off"   action="https://sklep.przelewy24.pl/zakup.php?">*/}
+                    {/*    <TextField  id="standard-required"*/}
+                    {/*                name="z24_id_sprzedawcy"*/}
+                    {/*                value="151177" fullWidth hidden*/}
 
-                        {/*/>*/}
-                        {/*<TextField  id="standard-required"*/}
-                        {/*            name="z24_kwota"*/}
-                        {/*            value={totalPrice()*100} fullWidth*/}
+                    {/*    />*/}
+                    {/*    <TextField  id="standard-required"*/}
+                    {/*                name="z24_crc"*/}
+                    {/*                value="2c6da7466f6140f9" fullWidth hidden*/}
 
-                        {/*/>*/}
-                        {/*<TextField  id="standard-required"*/}
-                        {/*            name="z24_nazwa"*/}
-                        {/*            value='abc' fullWidth*/}
+                    {/*    />*/}
+                    {/*    <TextField  id="standard-required"*/}
+                    {/*                name="z24_kwota"*/}
+                    {/*                value={totalPrice()*100} fullWidth hidden*/}
 
-                        {/*/>*/}
+                    {/*    />*/}
+                    {/*    <TextField  id="standard-required"*/}
+                    {/*                name="z24_nazwa"*/}
+                    {/*                value='abc' fullWidth hidden*/}
 
-                        {/*<TextField  id="standard-required"*/}
-                        {/*            name="p24_merchant_id"*/}
-                        {/*            value="151177" fullWidth*/}
-                        {/*/>*/}
-                        {/*<TextField  id="standard-required"*/}
-                        {/*            name="p24_pos_id"*/}
-                        {/*            value="151177" fullWidth*/}
-                        {/*/>*/}
-                        {/*<TextField  id="standard-required"*/}
-                        {/*            name="p24_sign"*/}
-                        {/*            value="151177|e6658e54a233ab60" fullWidth*/}
-                        {/*/>*/}
+                    {/*    />*/}
+
+                    {/*    <TextField  id="standard-required"*/}
+                    {/*                name="p24_merchant_id"*/}
+                    {/*                value="151177" fullWidth hidden*/}
+                    {/*    />*/}
+                    {/*    <TextField  id="standard-required"*/}
+                    {/*                name="p24_pos_id"*/}
+                    {/*                value="151177" fullWidth hidden*/}
+                    {/*    />*/}
+                    {/*    <TextField  id="standard-required"*/}
+                    {/*                name="p24_sign"*/}
+                    {/*                value="151177|e6658e54a233ab60" fullWidth*/}
+                    {/*    />*/}
 
 
-                        <p>suma {totalPrice()} zł</p>
-                        <Button variant="contained" type="submit">
+                    {/*    <p>suma {totalPrice()} zł</p>*/}
+
+                    {/*</form>*/}
+
+                    {/*<form action="https://sandbox.przelewy24.pl/api/v1/transaction/register" method="post" className="form">*/}
+                    {/*    <input type="text" name="merchantId" value="151177"/>*/}
+                    {/*    <input type="text" name="posId" value="151177"/>*/}
+                    {/*    <input type="text" name="sessionId" value="e70b9fd5-c8e5-4f83-ac59-d6189233afc0"/>*/}
+                    {/*    <input type="text" name="amount" value="2000"/>*/}
+                    {/*    <input type="text" name="currency" value="PLN"/>*/}
+                    {/*    <input type="text" name="country" value="pl"/>*/}
+                    {/*    <input type="text" name="description" value="TYTUŁ"/>*/}
+                    {/*    <input type="text" name="email" value="fxjechanka@wp.pl"/>*/}
+
+                    {/*    <input type="text" name="urlReturn" value="http://myhost.pl/skrypt_ok.php"/>*/}
+
+                    {/*    <input type="hidden" name="sign" value="631799fd6c5f231f4ed5db43946155a57a454088c4602f133cb1b9bac33d1b273629fd468a9dd30ed10edd4535781c9f"/>*/}
+                    {/*    <input name="submit_send" value="wyślij" type="submit"/>*/}
+                    {/*</form>*/}
+                    <form className='root' noValidate autoComplete="off" onSubmit={submitData}>
+                        <TextField required id="standard-required"
+                                   label="Email"
+                                   value={email}
+                                   fullWidth
+                                   onChange={e => setEmail(e.target.value)}/>
+                        <Button variant="contained" onClick={submitData}>
                             Przejdź do płatności
                         </Button>
                     </form>
-
-                    <form action="https://sandbox.przelewy24.pl/trnDirect" method="post" className="form">
-                        <input type="text" name="p24_session_id" value="abcdefghi"/>
-                        <input type="text" name="p24_merchant_id" value="151177"/>
-                        <input type="text" name="p24_pos_id" value="151177"/>
-                        <input type="text" name="p24_amount" value="2000"/>
-                        <input type="text" name="p24_currency" value="PLN"/>
-                        <input type="text" name="p24_description" value="TYTUŁ"/>
-                        <input type="text" name="p24_client" value="Jan Kowalski"/>
-                        <input type="text" name="p24_address" value="ul. Polska 33/33"/>
-                        <input type="text" name="p24_zip" value="66-777"/>
-                        <input type="text" name="p24_city" value="Poznań"/>
-                        <input type="text" name="p24_country" value="PL"/>
-                        <input type="text" name="p24_email" value="email@host.pl"/>
-                        <input type="text" name="p24_language" value="pl"/>
-                        <input type="text" name="p24_url_return" value="http://myhost.pl/skrypt_ok.php"/>
-                        <input type="text" name="p24_api_version" value="3.2"/>
-                        <input type="hidden" name="p24_sign" value="582e86b99b28eec7cbe5a4b84c7fcd31"/>
-                        <input name="submit_send" value="wyślij" type="submit"/>
-                    </form>
-
                 </div>
                 </div>
 

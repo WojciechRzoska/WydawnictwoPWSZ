@@ -80,5 +80,8 @@ export default{
     addText:(Text) =>
         axios.post(`${BASE_API_URL}/add-text`, Text),
 
+    //przelewy24
+    registerToken:(Data) =>
+        axios.post(`${BASE_API_URL}/registerToken`, Data),
 
 }

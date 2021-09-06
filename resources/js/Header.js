@@ -27,6 +27,7 @@ import ShoppingCart from "./components/pages/books/ShoppingCart";
 import FooterPages from "./components/pages/footerPages/FooterPages";
 import PageEdit from "./components/pages/account/AccountForms/PageEdit";
 import PageAdd from "./components/pages/account/AccountForms/PageAdd";
+import PaymentReturn from "./components/pages/books/PaymentReturn";
 
 function Header(){
     return(
@@ -60,6 +61,7 @@ function Header(){
                     <Route path='/informacje/:id' exact component={FooterPages}/>
                     <Route path='/edycja-informacji' exact component={PageEdit}/>
                     <Route path='/dodawanie-informacji' exact component={PageAdd}/>
+                    <Route path='/koniec-transakcji' exact component={PaymentReturn}/>
 
                 </Switch>
 
