@@ -14,7 +14,7 @@ class Przelewy24Controller extends Controller
         $amount = (int)$request->input('amount');
         $description = $request->input('description');
         $email = $request->input('email');
-        
+
         $signData = [
             'sessionId' => $sessionId,
             'merchantId' => 151177,
@@ -34,7 +34,7 @@ class Przelewy24Controller extends Controller
             'description' => $description,
             'email' => $email,
             'urlReturn' => 'http://127.0.0.1:8000/koniec-transakcji',
-            'urlStatus' =>  'https://sandbox.przelewy24.pl/api/v1/transaction/verify',
+            'urlStatus' =>  'http://127.0.0.1:8000/koniec-transakcji',
             'amount' => $amount,
             'language' => 'pl',
             'sign' => $sign,
