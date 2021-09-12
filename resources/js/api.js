@@ -1,6 +1,8 @@
 const axios = window.axios;
 
-const BASE_API_URL = 'http://127.0.0.1:8000/api'
+const BASE_API_URL = process.env.MIX_BASE_API_URL
+
+
 
 export default{
     //book api
