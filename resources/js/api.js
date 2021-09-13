@@ -1,6 +1,7 @@
 const axios = window.axios;
 
 
+const API_URL = process.env.MIX_API_URL
 
 
 export default{
@@ -16,7 +17,7 @@ export default{
     deleteBook: (id) =>
         axios.delete(`/api/book/${id}`),
     searchBook:(key) =>
-        axios.get(`/api/book/search/${key}`),
+        axios.get(`${API_URL}/api/book/search/${key}`),
 
     //bulletin api
     getAllBulletins: () =>
