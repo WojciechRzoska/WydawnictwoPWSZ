@@ -26,7 +26,7 @@ Route::resource('handle-user','App\Http\Controllers\UserController');
 
 //payment routes
 Route::post('/registerToken', [App\Http\Controllers\Przelewy24Controller::class, 'registerToken']);
-Route::get('/paymentVerify', [App\Http\Controllers\Przelewy24Controller::class], 'paymentVerify' );
+
 
 //Modules routes
 Route::resource('book', 'App\Http\Controllers\BooksController');

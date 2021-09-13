@@ -85,7 +85,5 @@ export default{
     //przelewy24
     registerToken:(Data) =>
         axios.post(`/api/registerToken`, Data),
-    test:()=>
-        axios.get(`/api/paymentVerify`),
 
 }
