@@ -68,13 +68,14 @@ function Books() {
         }
         let reverseBook = books.map(item => item).reverse();
         if (searchData) {
-            let data = searchData;
-            if (data.length === 0) {
+            // let data = searchData;
+
+            if (searchData.length === 0) {
                 return (
                     <p> Nie znaleziono takiej książki </p>
                 )
             } else {
-                let reverseData = data.map(item => item).reverse();
+                let reverseData = searchData.map(item => item).reverse();
                 return reverseData.map((book) => (
                     <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
 
