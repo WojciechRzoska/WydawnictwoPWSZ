@@ -34,7 +34,7 @@ class Przelewy24Controller extends Controller
             'description' => $description,
             'email' => $email,
             'urlReturn' => url('koniec-transakcji'),
-            'urlStatus' =>  url('koniec-transakcji'),
+            'urlStatus' =>  url('api/paymentVerify'),
             'amount' => $amount,
             'language' => 'pl',
             'sign' => $sign,
@@ -53,6 +53,7 @@ class Przelewy24Controller extends Controller
     }
 
     public function paymentVerify(Request $request){
-        return $request;
+        var_dump($request);
+        return null;
     }
 }
