@@ -7,7 +7,7 @@ const API_URL = process.env.MIX_API_URL
 export default{
     //book api
     getAllItems: () =>
-        axios.get(`/api/book`),
+        axios.get(`${API_URL}/api/book`),
     addBook: (Book) =>
         axios.post(`/api/book`, Book),
     getOneBook: (id) =>
