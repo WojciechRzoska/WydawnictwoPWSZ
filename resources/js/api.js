@@ -7,7 +7,7 @@ const API_URL = process.env.MIX_API_URL
 export default{
     //book api
     getAllItems: () =>
-        axios.get(`${API_URL}/api/book`),
+        axios.get(`/api/book`),
     addBook: (Book) =>
         axios.post(`/api/book`, Book),
     getOneBook: (id) =>
@@ -17,7 +17,7 @@ export default{
     deleteBook: (id) =>
         axios.delete(`/api/book/${id}`),
     searchBook:(key) =>
-        axios.get(`${API_URL}/api/book/search/${key}`),
+        axios.get(`https://wydacwnictwotest.herokuapp.com/api/book/search/${key}`),
 
     //bulletin api
     getAllBulletins: () =>
