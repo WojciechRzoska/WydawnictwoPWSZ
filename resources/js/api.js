@@ -17,7 +17,7 @@ export default{
     deleteBook: (id) =>
         axios.delete(`/api/book/${id}`),
     searchBook:(key) =>
-        axios.get(`https://wydacwnictwotest.herokuapp.com/api/book/search/${key}`),
+        axios.get(`/api/book/search/${key}`),
 
     //bulletin api
     getAllBulletins: () =>
