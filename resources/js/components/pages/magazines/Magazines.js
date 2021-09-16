@@ -5,28 +5,27 @@ import Magazine from "./Magazine/Magazine";
 import {Link} from 'react-router-dom';
 import Footer from "../../Footer";
 import './Magazines.css';
+import Pagination from "../../Pagination";
 
 
 function Magazines() {
-    const [magazines, setMagazines] = useState(null);
-    const [searchData, setSearchData] = useState(magazines);
+    const [magazines, setMagazines] = useState([]);
+    const [searchData, setSearchData] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [magazinesPerPage, setMagazinesPerPage] = useState (6);
 
     useEffect(() => {
+        const getData = async () => {
+            const res = await api.getAllMagazines();
+            setMagazines(res.data.data);
+        }
         getData();
     }, []);
 
-    async function getData() {
-        api.getAllMagazines().then(res => {
-            const result = res.data
-            setMagazines(result.data);
-        });
-
-    }
-
-    async function deleteOperation(id) {
-        await api.deleteMagazine(id);
-        getData();
-    }
+    const indexOfLastBook = currentPage * magazinesPerPage;
+    const indexOfFirstBook = indexOfLastBook - magazinesPerPage;
+    const currentBooks = magazines.slice(indexOfFirstBook, indexOfLastBook);
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
     async function search(key) {
         let result = await api.searchMagazine(key);
@@ -35,7 +34,6 @@ function Magazines() {
     }
 
     const renderMagazines = () => {
-
         if (!magazines) {
             return (
                 <p>Ładowanie...</p>
@@ -46,7 +44,7 @@ function Magazines() {
                 <p>Brak czasopism</p>
             )
         }
-        let reverseMagazine = magazines.map(item => item).reverse();
+        let reverseMagazine = currentBooks.map(item => item).reverse();
         if (searchData) {
             let data = searchData
             if (data.length === 0) {
@@ -55,8 +53,6 @@ function Magazines() {
                 let reverseData = data.map(item => item).reverse();
                 return reverseData.map((magazine) => (
                     <Grid item key={magazine.id} xs={12} sm={6} md={4} lg={3}>
-                        <Link to={`/edit-magazine/${magazine.id}`}>Edit</Link>
-                        <Button variant='contained' onClick={() => deleteOperation(magazine.id)}>Usuń</Button>
                         <Magazine data={magazine}/>
                     </Grid>
                 ))
@@ -82,6 +78,10 @@ function Magazines() {
                 <Grid container justify="center">
                     {renderMagazines()}
                 </Grid>
+
+            </div>
+            <div className='paginationBar'>
+                <Pagination booksPerPage={magazinesPerPage} totalBooks={magazines.length} paginate={paginate}/>
             </div>
             <Footer/>
         </>

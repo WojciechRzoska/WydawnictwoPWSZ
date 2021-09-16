@@ -4,30 +4,29 @@ import {Grid, Button, TextField} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import Bulletin from "./Bulletin/Bulletin";
 import Footer from "../../Footer";
+import Pagination from "../../Pagination";
 
 
 function Bulletins() {
-    const [bulletins, setBulletins] = useState(null);
-    const [searchData, setSearchData] = useState(bulletins);
+    const [bulletins, setBulletins] = useState([]);
+    const [searchData, setSearchData] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [bulletinsPerPage, setBulletinsPerPage] = useState (6);
+
 
     useEffect(() => {
+        const getData = async () => {
+            const res = await api.getAllBulletins();
+            setBulletins(res.data.data);
+        }
         getData();
     }, []);
 
-    async function deleteOperation(id) {
-        let result = await api.deleteBulletin(id);
-        result = await result.data
-        console.warn(result);
-        getData(); //?
-    }
+    const indexOfLastBook = currentPage * bulletinsPerPage;
+    const indexOfFirstBook = indexOfLastBook - bulletinsPerPage;
+    const currentBooks = bulletins.slice(indexOfFirstBook, indexOfLastBook);
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
-    async function getData() {
-        api.getAllBulletins().then(res => {
-            const result = res.data;
-            setBulletins(result.data)
-
-        });
-    }
 
     async function search(key) {
         let result = await api.searchBulletin(key);
@@ -47,7 +46,7 @@ function Bulletins() {
                 <p>Brak biuletynów</p>
             )
         }
-        let reverseBulletin = bulletins.map(item => item).reverse();
+        let reverseBulletin = currentBooks.map(item => item).reverse();
         if (searchData) {
             let data = searchData;
             if (data.length === 0) {
@@ -58,8 +57,6 @@ function Bulletins() {
                 let reverseData = data.map(item => item).reverse();
                 return reverseData.map((bulletin) => (
                     <Grid item key={bulletin.id} xs={12} sm={6} md={4} lg={3}>
-                        <Link to={`/edit-bulletin/${bulletin.id}`}>Edit</Link>
-                        <Button variant='contained' onClick={() => deleteOperation(bulletin.id)}>Usuń</Button>
                         <Bulletin data={bulletin}/>
                     </Grid>
                 ))
@@ -85,6 +82,10 @@ function Bulletins() {
                 <Grid container justify='center'>
                     {renderBulletins()}
                 </Grid>
+
+            </div>
+            <div className='paginationBar'>
+                <Pagination booksPerPage={bulletinsPerPage} totalBooks={bulletins.length} paginate={paginate}/>
             </div>
             <Footer/>
         </>

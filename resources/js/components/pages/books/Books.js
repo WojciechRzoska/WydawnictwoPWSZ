@@ -8,6 +8,7 @@ import Footer from "../../Footer";
 import './Books.css';
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import Pagination from "../../Pagination";
 
 
 function Alert(props) {
@@ -15,16 +16,29 @@ function Alert(props) {
 }
 
 function Books() {
-    const [books, setBooks] = useState(null);
-    const [searchData, setSearchData] = useState(books);
+    const [books, setBooks] = useState([]);
+    const [searchData, setSearchData] = useState(null);
     const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
     const [cart, setCart] = useState(cartFromLocalStorage);
     const [open, setOpen] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [booksPerPage, setBookPerPage] = useState (6);
+
 
     useEffect(() => {
+        const getData = async () => {
+            const res = await api.getAllItems();
+            setBooks(res.data.data);
+        }
         getData();
         localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
+
+    const indexOfLastBook = currentPage * booksPerPage;
+    const indexOfFirstBook = indexOfLastBook - booksPerPage;
+    const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
 
     const addToCart = (book) => {
         setCart([...cart, book]);
@@ -39,12 +53,7 @@ function Books() {
         setOpen(false);
     };
 
-    async function getData() {
-        api.getAllItems().then(res => {
-            const result = res.data;
-            setBooks(result.data);
-        });
-    }
+
 
     const quantity = (quantity, data) => {
         if (quantity === 0) {
@@ -55,6 +64,8 @@ function Books() {
                 className="fas fa-cart-plus fa-2x"/></Button>
         }
     }
+
+
     const renderBooks = () => {
         if (!books) {
             return (
@@ -66,7 +77,8 @@ function Books() {
                 <p>Brak książek</p>
             )
         }
-        let reverseBook = books.map(item => item).reverse();
+
+        let reverseBook = currentBooks.map(item => item).reverse();
         if (searchData) {
             // let data = searchData;
 
@@ -78,8 +90,23 @@ function Books() {
                 let reverseData = searchData.map(item => item).reverse();
                 return reverseData.map((book) => (
                     <Grid item key={book.id} xs={12} sm={6} md={4} lg={3}>
-
+                        <div className='gridItem'>
                         <Book data={book}/>
+                            <div className='cardBody'>
+                                <div className='quantity'>
+                                    <h6>dostępnych sztuk {book.quantity} </h6>
+                                </div>
+                                <div className='cardBodyBottom'>
+                                    <div className='price'>
+                                        <p><span>Cena: {book.price} zł</span></p>
+                                    </div>
+                                    <div className='buyButton'>
+                                        {quantity(book.quantity, book)}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
 
                     </Grid>
                 ))
@@ -87,7 +114,7 @@ function Books() {
         }
 
         return reverseBook.map((book) => (
-            <Grid item key={book.id} xs={7} sm={6} md={4} lg={3}>
+            <Grid item key={book.id} xs={7} sm={6} md={4} lg={4}>
                 <div className='gridItem'>
                     <Book data={book}/>
                     <div className='cardBody'>
@@ -143,12 +170,16 @@ function Books() {
                     <Grid container justify="center">
                         {renderBooks()}
                     </Grid>
+
                     <Snackbar open={open} autoHideDuration={1000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity="success">
                             Dodano produkt do koszyka!
                         </Alert>
                     </Snackbar>
                 </div>
+            </div>
+            <div className='paginationBar'>
+                <Pagination booksPerPage={booksPerPage} totalBooks={books.length} paginate={paginate}/>
             </div>
             <Footer/>
         </>

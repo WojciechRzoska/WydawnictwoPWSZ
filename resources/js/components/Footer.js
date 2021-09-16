@@ -19,7 +19,7 @@ function Footer() {
     return(
         <div className='Footer-container'>
             <div className='Footer'>
-                <div className='Footer-heading'>
+                <div className='Footer-heading' id='info'>
                     <img src={Logo} alt='logo' className='Logo'/>
                     <p>Wydawnictwo Państwowej Wyższej Szkoły Zawodowowej w Elblągu</p>
                     <div className='Footer-info-data'>

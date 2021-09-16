@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import api from "../../../../api";
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import {Grid, Button} from "@material-ui/core";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -17,6 +17,7 @@ function BookInfo(props) {
     const cartFromLocalStorage = JSON.parse(localStorage.getItem('cart') || '[]');
     const [cart, setCart] = useState(cartFromLocalStorage);
     const [open, setOpen] = useState(false);
+
 
     const addToCart = (book) => {
         setCart([...cart, book]);
@@ -84,7 +85,15 @@ function BookInfo(props) {
                                 <p>Cena: {object.price} zł</p>
                                 <div className='button'>
                                     {quantity(object.quantity)}
+                                    <div className='cartItem'>
+                                        <Button component={Link}
+                                                to='/koszyk'
+                                        >
+                                            <i className="fas fa-shopping-cart fa-2x"></i>({cart.length})
+                                        </Button>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
 
